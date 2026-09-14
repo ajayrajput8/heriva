@@ -15,7 +15,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import "./AdminLogin.css";
 
-const API_BASE = "http://localhost:8080/api";
+const API_BASE = "https://heriva-backend.onrender.com/api";
 
 export default function AdminLogin() {
   const navigate = useNavigate();

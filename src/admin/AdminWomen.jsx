@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { getAdminToken } from "./adminApi";
 
-const API = "http://localhost:8080/api";
+const API = "https://heriva-backend.onrender.com/api";
 
 export default function AdminWomen() {
   const [women, setWomen] = useState([]);
