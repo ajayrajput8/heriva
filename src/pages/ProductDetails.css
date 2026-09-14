@@ -1,0 +1,57 @@
+/* =========================================================
+   WISHLIST BUTTON STATES
+   Add these rules to ProductDetails.css
+   ========================================================= */
+
+.heart {
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.heart:hover {
+  transform: scale(1.05);
+}
+
+.heart.active {
+  color: #7b241c;
+  background: #f8ebe6;
+  border-color: #e0c5bc;
+}
+
+.heart:disabled {
+  opacity: 0.55;
+  cursor: wait;
+  transform: none;
+}
+
+
+/* =========================================================
+   UNDER-ACTIONS WISHLIST
+   ========================================================= */
+
+.under-actions .wishlist-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.under-actions .wishlist-action.active {
+  color: #7b241c;
+}
+
+.under-actions .wishlist-action:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+.under-actions .wishlist-action svg {
+  transition: fill 0.2s ease;
+}

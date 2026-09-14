@@ -1,0 +1,740 @@
+.partner-register-page {
+  min-height: calc(100vh - 66px);
+  display: grid;
+  grid-template-columns: 46% 54%;
+  background: #f4eee3;
+}
+
+
+/* ==========================================
+   LEFT SIDE
+========================================== */
+
+.partner-register-left {
+  position: relative;
+  min-height: 750px;
+  overflow: hidden;
+  background: #f4eee3;
+}
+
+.partner-left-content {
+  position: absolute;
+  z-index: 3;
+  left: max(35px, calc((100vw - 1140px) / 2));
+  top: 42px;
+  width: 410px;
+}
+
+.partner-eyebrow {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #263229;
+  font-weight: 600;
+}
+
+.partner-left-content h1 {
+  font: 600 46px / 1.08 "Playfair Display", serif;
+  color: #26352a;
+  margin: 17px 0 13px;
+}
+
+.partner-left-content h1 em {
+  color: #a94b39;
+  font-style: normal;
+}
+
+.partner-left-content > p {
+  width: 350px;
+  color: #3f453f;
+  font-size: 14px;
+  line-height: 1.45;
+  margin-bottom: 24px;
+}
+
+
+/* ==========================================
+   BENEFITS
+========================================== */
+
+.partner-benefits {
+  display: grid;
+  gap: 13px;
+}
+
+.partner-benefit {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.partner-benefit > span {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #edd9c9;
+  color: #a94b39;
+}
+
+.partner-benefit p {
+  margin: 0;
+  color: #222923;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+
+/* ==========================================
+   QUOTE
+========================================== */
+
+.partner-quote {
+  margin-top: 27px;
+  margin-left: -5px;
+  color: #a94b39;
+  font: 500 27px / 1.15 Caveat, cursive;
+  transform: rotate(-5deg);
+}
+
+.partner-quote span {
+  display: block;
+  font-size: 32px;
+  margin-left: 100px;
+}
+
+
+/* ==========================================
+   IMAGE
+========================================== */
+
+.partner-register-image {
+  position: absolute;
+  inset: 0;
+}
+
+.partner-register-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% center;
+  display: block;
+}
+
+.partner-register-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #f4eee3 0%,
+    rgba(244, 238, 227, 0.72) 15%,
+    rgba(244, 238, 227, 0) 48%
+  );
+}
+
+.impact-badge {
+  position: absolute;
+  z-index: 4;
+  right: 20px;
+  bottom: 38px;
+  width: 210px;
+  padding: 18px 20px;
+  background: #f9f5ed;
+  transform: rotate(-4deg);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.impact-badge strong {
+  display: block;
+  font: 600 19px "Playfair Display", serif;
+  color: #26352a;
+}
+
+.impact-badge em {
+  color: #a94b39;
+  font-style: normal;
+}
+
+
+/* ==========================================
+   RIGHT SIDE
+========================================== */
+
+.partner-register-right {
+  padding: 15px 24px 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.registration-card {
+  width: 100%;
+  max-width: 790px;
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+  background: #fffefa;
+  border-radius: 17px;
+  padding: 38px 34px 23px;
+  box-shadow: 0 8px 30px rgba(40, 43, 37, 0.08);
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.registration-header h2 {
+  margin: 0;
+  color: #121b17;
+  font: 600 34px / 1.15 "Playfair Display", serif;
+}
+
+.registration-header p {
+  max-width: 680px;
+  color: #666b67;
+  font-size: 13px;
+  line-height: 1.45;
+  margin: 7px 0 22px;
+}
+
+
+/* ==========================================
+   PROGRESS
+========================================== */
+
+.registration-progress {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  position: relative;
+  margin: 10px 0 29px;
+}
+
+.registration-progress::before {
+  content: "";
+  position: absolute;
+  left: 9%;
+  right: 9%;
+  top: 19px;
+  height: 1px;
+  background: #ddc9bf;
+}
+
+.progress-step {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.progress-circle {
+  width: 39px;
+  height: 39px;
+  margin: auto;
+  display: grid;
+  place-items: center;
+  border: 1px solid #ddc5bb;
+  border-radius: 50%;
+  background: #fffefa;
+  color: #5f625e;
+  font-size: 12px;
+}
+
+.progress-step.current .progress-circle,
+.progress-step.completed .progress-circle {
+  background: #a94b39;
+  border-color: #a94b39;
+  color: #fff;
+}
+
+.progress-step span {
+  display: block;
+  margin-top: 8px;
+  color: #666b67;
+  font-size: 10px;
+}
+
+.progress-step.current span {
+  color: #a94b39;
+  font-weight: 600;
+}
+
+
+/* ==========================================
+   ERROR
+========================================== */
+
+.registration-error {
+  padding: 10px 13px;
+  margin-bottom: 18px;
+  border-radius: 6px;
+  background: #f9e9e5;
+  color: #a13e2f;
+  font-size: 10px;
+}
+
+
+/* ==========================================
+   FORM
+========================================== */
+
+.registration-step h3 {
+  color: #202c25;
+  font: 600 20px "Playfair Display", serif;
+  margin: 0 0 13px;
+}
+
+.step-description {
+  color: #777;
+  font-size: 11px;
+  margin-top: -5px;
+  margin-bottom: 18px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 19px;
+}
+
+.form-field {
+  min-width: 0;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-field label {
+  display: block;
+  color: #343a35;
+  font-size: 10px;
+  margin-bottom: 6px;
+}
+
+.form-field label b {
+  color: #a94b39;
+}
+
+.form-field label small {
+  color: #888;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  border: 1px solid #d9d8d5;
+  border-radius: 6px;
+  outline: none;
+  background: #fff;
+  color: #333a35;
+  font: 11px "DM Sans", sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-field input,
+.form-field select {
+  height: 38px;
+  padding: 0 12px;
+}
+
+.form-field textarea {
+  min-height: 64px;
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: #a94b39;
+  box-shadow: 0 0 0 3px rgba(169, 75, 57, 0.08);
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: #9aa09c;
+}
+
+
+/* ==========================================
+   GENDER
+========================================== */
+
+.gender-options {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  height: 38px;
+}
+
+.radio-option {
+  display: flex !important;
+  align-items: center;
+  gap: 7px;
+  margin: 0 !important;
+  cursor: pointer;
+}
+
+.radio-option input {
+  width: 19px;
+  height: 19px;
+  margin: 0;
+  accent-color: #a94b39;
+}
+
+
+/* ==========================================
+   PHONE
+========================================== */
+
+.phone-input {
+  height: 38px;
+  display: flex;
+  border: 1px solid #d9d8d5;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.phone-input span {
+  width: 50px;
+  display: grid;
+  place-items: center;
+  border-right: 1px solid #ddd;
+  color: #555;
+  font-size: 10px;
+  background: #f7f6f3;
+}
+
+.phone-input input {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  flex: 1;
+}
+
+
+/* ==========================================
+   DATE INPUT
+========================================== */
+
+.input-icon {
+  position: relative;
+}
+
+.input-icon input {
+  padding-right: 40px;
+}
+
+.input-icon svg {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  color: #555;
+  pointer-events: none;
+}
+
+
+/* ==========================================
+   UPLOAD
+========================================== */
+
+.upload-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 18px;
+}
+
+.upload-box {
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px dashed #d2c4ba;
+  border-radius: 9px;
+  background: #fcfaf6;
+  color: #a94b39;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.upload-box:hover {
+  background: #f8f0e9;
+  border-color: #a94b39;
+}
+
+.upload-box strong {
+  color: #313832;
+  font-size: 11px;
+}
+
+.upload-box span,
+.upload-box small {
+  color: #888;
+  font-size: 9px;
+}
+
+.upload-box input {
+  display: none;
+}
+
+.field-note {
+  display: block;
+  color: #888;
+  font-size: 9px;
+  margin-top: 5px;
+}
+
+.password-section {
+  margin-top: 20px;
+}
+
+
+/* ==========================================
+   REVIEW
+========================================== */
+
+.review-section {
+  display: grid;
+  gap: 13px;
+}
+
+.review-block {
+  border: 1px solid #e5dfd6;
+  border-radius: 8px;
+  padding: 14px;
+  background: #fff;
+}
+
+.review-block h4 {
+  color: #a94b39;
+  font: 600 15px "Playfair Display", serif;
+  margin: 0 0 10px;
+}
+
+.review-block div {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 5px 0;
+  border-bottom: 1px solid #f0ece5;
+}
+
+.review-block div:last-child {
+  border-bottom: 0;
+}
+
+.review-block span {
+  color: #888;
+  font-size: 10px;
+}
+
+.review-block b {
+  color: #333a35;
+  font-size: 10px;
+  text-align: right;
+}
+
+.terms-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 17px;
+  color: #666;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.terms-checkbox input {
+  margin-top: 2px;
+  accent-color: #a94b39;
+}
+
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.registration-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 25px;
+  padding-top: 17px;
+  border-top: 1px solid #ebe5dc;
+}
+
+.next-btn,
+.back-btn {
+  height: 41px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border-radius: 7px;
+  padding: 0 18px;
+  font: 600 11px "DM Sans", sans-serif;
+  cursor: pointer;
+}
+
+.next-btn {
+  border: 0;
+  background: #a94b39;
+  color: #fff;
+}
+
+.next-btn:hover {
+  background: #913d2e;
+}
+
+.next-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.back-btn {
+  border: 1px solid #ddd5ca;
+  background: #fff;
+  color: #555d57;
+}
+
+.back-btn:hover {
+  border-color: #a94b39;
+  color: #a94b39;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 1100px) {
+  .partner-register-page {
+    grid-template-columns: 43% 57%;
+  }
+
+  .partner-left-content {
+    width: 350px;
+  }
+
+  .partner-left-content h1 {
+    font-size: 39px;
+  }
+
+  .registration-card {
+    padding: 30px 25px 20px;
+  }
+
+  .registration-header h2 {
+    font-size: 29px;
+  }
+}
+
+
+@media (max-width: 850px) {
+  .partner-register-page {
+    display: block;
+  }
+
+  .partner-register-left {
+    min-height: 450px;
+  }
+
+  .partner-left-content {
+    left: 30px;
+    top: 30px;
+    width: 360px;
+  }
+
+  .partner-register-image {
+    width: 100%;
+  }
+
+  .partner-register-right {
+    padding: 25px 15px;
+  }
+
+  .registration-card {
+    max-height: none;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .partner-register-left {
+    min-height: 500px;
+  }
+
+  .partner-left-content {
+    left: 22px;
+    top: 25px;
+    width: calc(100% - 44px);
+  }
+
+  .partner-left-content h1 {
+    font-size: 35px;
+  }
+
+  .partner-left-content > p {
+    width: 100%;
+    font-size: 12px;
+  }
+
+  .partner-benefit p {
+    font-size: 11px;
+  }
+
+  .partner-register-image {
+    opacity: 0.7;
+  }
+
+  .impact-badge {
+    display: none;
+  }
+
+  .registration-card {
+    padding: 25px 17px;
+    border-radius: 11px;
+  }
+
+  .registration-header h2 {
+    font-size: 25px;
+  }
+
+  .registration-progress {
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+
+  .progress-step {
+    min-width: 100px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full-width {
+    grid-column: auto;
+  }
+
+  .upload-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .registration-actions {
+    justify-content: space-between;
+  }
+
+  .next-btn {
+    flex: 1;
+  }
+}

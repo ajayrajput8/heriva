@@ -1,0 +1,1106 @@
+/* =====================================
+   EDIT PROFILE BUTTON
+===================================== */
+
+.edit-profile-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  margin-top: 5px;
+
+  border: none;
+  background: none;
+
+  padding: 0;
+
+  color: #7b241c;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.edit-profile-link:hover {
+  text-decoration: underline;
+}
+
+
+/* =====================================
+   ACCOUNT MENU BUTTON
+===================================== */
+
+.account-menu {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px 14px;
+
+  border: none;
+  background: transparent;
+
+  color: inherit;
+
+  font: inherit;
+  text-align: left;
+
+  cursor: pointer;
+
+  border-radius: 7px;
+}
+
+.account-menu.active {
+  background: #f5ebe5;
+  color: #7b241c;
+  font-weight: 600;
+}
+
+
+/* =====================================
+   MODAL OVERLAY
+===================================== */
+
+.modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  background: rgba(30, 24, 20, 0.55);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  animation: modalFadeIn 0.2s ease;
+}
+
+@keyframes modalFadeIn {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =====================================
+   ORDER DETAIL MODAL
+===================================== */
+
+.order-detail-modal {
+  width: min(620px, 100%);
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  background: #fff;
+
+  border-radius: 16px;
+
+  padding: 27px;
+
+  box-shadow:
+    0 25px 70px
+    rgba(0, 0, 0, 0.22);
+
+  animation: modalSlideUp 0.25s ease;
+}
+
+@keyframes modalSlideUp {
+
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =====================================
+   MODAL HEADER
+===================================== */
+
+.order-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #eee6df;
+}
+
+.order-modal-header span {
+  color: #8a7d74;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+}
+
+.order-modal-header h2 {
+  margin: 5px 0;
+
+  color: #302823;
+
+  font-size: 23px;
+}
+
+.order-modal-header p {
+  margin: 0;
+
+  color: #857970;
+
+  font-size: 12px;
+}
+
+
+/* =====================================
+   CLOSE
+===================================== */
+
+.modal-close {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: #f5eee8;
+
+  color: #6f625a;
+
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: #eadfd6;
+}
+
+
+/* =====================================
+   STATUS
+===================================== */
+
+.order-modal-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 20px 0;
+
+  padding: 15px;
+
+  border-radius: 10px;
+
+  background: #eef6ef;
+}
+
+.status-icon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #dceedd;
+
+  color: #3e7c4b;
+}
+
+.order-modal-status strong {
+  display: block;
+
+  color: #3d7547;
+
+  font-size: 14px;
+}
+
+.order-modal-status span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #6e8171;
+
+  font-size: 12px;
+}
+
+
+/* =====================================
+   MODAL SECTION
+===================================== */
+
+.order-modal-section {
+  padding: 20px 0;
+
+  border-bottom: 1px solid #eee7e0;
+}
+
+.order-modal-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin: 0 0 15px;
+
+  color: #352d28;
+
+  font-size: 15px;
+}
+
+.order-modal-section h3 svg {
+  color: #7b241c;
+}
+
+
+/* =====================================
+   ORDER ITEM
+===================================== */
+
+.order-modal-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 10px 0;
+}
+
+.order-modal-item img {
+  width: 58px;
+  height: 58px;
+
+  object-fit: cover;
+
+  border-radius: 8px;
+
+  background: #f4eee8;
+}
+
+.order-modal-item > div {
+  flex: 1;
+}
+
+.order-modal-item strong {
+  display: block;
+
+  color: #342c27;
+
+  font-size: 13px;
+}
+
+.order-modal-item span {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #81766f;
+
+  font-size: 12px;
+}
+
+.order-modal-item > b {
+  color: #332a25;
+
+  font-size: 13px;
+
+  white-space: nowrap;
+}
+
+
+/* =====================================
+   ADDRESS
+===================================== */
+
+.modal-address {
+  padding: 14px;
+
+  background: #faf7f3;
+
+  border-radius: 9px;
+}
+
+.modal-address strong {
+  color: #342c27;
+
+  font-size: 13px;
+}
+
+.modal-address p {
+  margin: 6px 0 0;
+
+  color: #776c64;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+}
+
+
+/* =====================================
+   PAYMENT
+===================================== */
+
+.modal-payment-row {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 8px 0;
+}
+
+.modal-payment-row span {
+  color: #81766f;
+
+  font-size: 12px;
+}
+
+.modal-payment-row strong {
+  color: #342c27;
+
+  font-size: 12px;
+}
+
+
+/* =====================================
+   TOTAL
+===================================== */
+
+.order-modal-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 22px 0;
+}
+
+.order-modal-total span {
+  color: #342c27;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.order-modal-total strong {
+  color: #7b241c;
+
+  font-size: 22px;
+}
+
+
+/* =====================================
+   DONE
+===================================== */
+
+.modal-done-btn {
+  width: 100%;
+
+  height: 44px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #7b241c;
+
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.modal-done-btn:hover {
+  background: #641d17;
+}
+
+
+/* =====================================
+   PROFILE MODAL
+===================================== */
+
+.profile-modal {
+  width: min(430px, 100%);
+
+  background: #fff;
+
+  border-radius: 16px;
+
+  padding: 30px;
+
+  position: relative;
+
+  box-shadow:
+    0 25px 70px
+    rgba(0, 0, 0, 0.22);
+}
+
+.profile-modal > .modal-close {
+  position: absolute;
+
+  right: 18px;
+  top: 18px;
+}
+
+.profile-modal-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f5e9e3;
+
+  color: #7b241c;
+
+  margin-bottom: 15px;
+}
+
+.profile-modal h2 {
+  margin: 0;
+
+  color: #302823;
+
+  font-size: 23px;
+}
+
+.profile-modal > p {
+  margin: 6px 0 24px;
+
+  color: #81766f;
+
+  font-size: 13px;
+}
+
+.profile-modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-modal label {
+  margin-bottom: 7px;
+
+  color: #4a403a;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.profile-modal input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  height: 43px;
+
+  margin-bottom: 16px;
+
+  padding: 0 12px;
+
+  border: 1px solid #ddd3ca;
+
+  border-radius: 7px;
+
+  outline: none;
+
+  color: #352d28;
+
+  font-size: 13px;
+}
+
+.profile-modal input:focus {
+  border-color: #9c5a50;
+}
+
+.profile-modal input:disabled {
+  background: #f5f1ed;
+
+  color: #8b817a;
+
+  cursor: not-allowed;
+}
+
+
+/* =====================================
+   PROFILE ACTIONS
+===================================== */
+
+.profile-modal-actions {
+  display: flex;
+  gap: 10px;
+
+  margin-top: 5px;
+}
+
+.cancel-btn,
+.save-profile-btn {
+  flex: 1;
+
+  height: 43px;
+
+  border-radius: 7px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.cancel-btn {
+  border: 1px solid #d9cec5;
+
+  background: #fff;
+
+  color: #6f625a;
+}
+
+.save-profile-btn {
+  border: none;
+
+  background: #7b241c;
+
+  color: #fff;
+}
+
+.save-profile-btn:hover {
+  background: #641d17;
+}
+
+.save-profile-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* =====================================
+   ADDRESS MODAL
+===================================== */
+
+.address-modal {
+  width: min(560px, 92vw);
+  max-height: 90vh;
+  overflow-y: auto;
+
+  background: #fff;
+  border-radius: 18px;
+
+  padding: 30px;
+
+  position: relative;
+
+  box-shadow:
+    0 25px 70px
+    rgba(0, 0, 0, 0.22);
+
+  animation: modalSlideUp 0.25s ease;
+}
+
+.address-modal > .modal-close {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+}
+
+.address-modal h2 {
+  margin: 0 0 6px;
+
+  color: #302823;
+
+  font-size: 23px;
+}
+
+.address-modal > p {
+  margin: 6px 0 24px;
+
+  color: #81766f;
+
+  font-size: 13px;
+}
+
+.address-modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.address-modal label {
+  margin-bottom: 7px;
+
+  color: #4a403a;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.address-modal input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  height: 43px;
+
+  margin-bottom: 16px;
+
+  padding: 0 12px;
+
+  border: 1px solid #ddd3ca;
+  border-radius: 7px;
+
+  outline: none;
+
+  color: #352d28;
+
+  font-size: 13px;
+}
+
+.address-modal input:focus {
+  border-color: #9c5a50;
+}
+
+/* =====================================
+   CITY + STATE
+===================================== */
+
+.address-form-row {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 14px;
+}
+
+.address-form-row > div {
+  min-width: 0;
+}
+
+
+/* =====================================
+   DEFAULT ADDRESS
+===================================== */
+
+.default-address-check {
+  display: flex !important;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin: 3px 0 20px;
+
+  cursor: pointer;
+}
+
+.default-address-check input {
+  width: auto;
+
+  height: auto;
+
+  margin: 0;
+}
+
+
+/* =====================================
+   ADDRESS ACTIONS
+===================================== */
+
+.address-modal-actions {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 5px;
+}
+
+.address-modal-actions button {
+  flex: 1;
+
+  height: 43px;
+
+  border-radius: 7px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.address-modal-actions .cancel-btn {
+  border: 1px solid #d9cec5;
+
+  background: #fff;
+
+  color: #6f625a;
+}
+
+.address-modal-actions .save-profile-btn {
+  border: none;
+
+  background: #7b241c;
+
+  color: #fff;
+}
+
+.address-modal-actions .save-profile-btn:hover {
+  background: #641d17;
+}
+
+.address-modal-actions button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+
+/* =====================================
+   EMPTY ADDRESS CARD
+===================================== */
+
+.empty-address {
+  min-height: 210px;
+
+  padding: 26px 24px 48px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  border: 1px dashed #d8cbc0;
+  border-radius: 14px;
+
+  background: #fffdfb;
+
+  text-align: center;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.empty-address:hover {
+  border-color: #c9aaa0;
+  background: #fffaf6;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 22px rgba(70, 45, 35, 0.07);
+}
+
+.empty-address > svg {
+  width: 34px;
+  height: 34px;
+
+  margin-bottom: 12px;
+
+  color: #b05243;
+}
+
+.empty-address p {
+  max-width: 210px;
+
+  margin: 0 0 28px;
+
+  color: #81766f;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* =====================================
+   ADD ADDRESS BUTTON - EMPTY STATE
+   PERFECT CIRCLE + LABEL BELOW
+===================================== */
+
+.empty-address button {
+  position: relative;
+
+  width: 30px;
+  height: 30px;
+
+  min-width: 30px;
+  min-height: 30px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 64px;
+
+  border: 1px solid #e0d0c6;
+  border-radius: 50%;
+
+  background: #fffaf6;
+  color: #7b241c;
+
+  font-family: inherit;
+  font-size: 0;
+  line-height: 1;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 14px rgba(123, 36, 28, 0.09);
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Plus circle */
+
+.empty-address button::before {
+  content: "+";
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 40px;
+
+  border-radius: 50%;
+
+  background: #f3e8e1;
+  color: #7b241c;
+
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Text below circle */
+
+
+/* Hover */
+
+.empty-address button:hover {
+  background: #fff5ef;
+  border-color: #cfa99d;
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 9px 20px rgba(123, 36, 28, 0.14);
+}
+
+.empty-address button:hover::before {
+  background: #7b241c;
+  color: #fff;
+
+  transform: scale(1.05);
+}
+
+/* Active */
+
+.empty-address button:active {
+  transform: translateY(-1px);
+}
+
+/* Keyboard */
+
+.empty-address button:focus-visible {
+  outline: 3px solid rgba(156, 90, 80, 0.20);
+  outline-offset: 4px;
+}
+
+
+/* =====================================
+   HEADER ADD ADDRESS BUTTON
+===================================== */
+
+.add-address-btn {
+  min-height: 42px;
+  min-width: 136px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 0 17px;
+
+  border: 1px solid #7b241c;
+  border-radius: 9px;
+
+  background: #7b241c;
+  color: #fff;
+
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 14px rgba(123, 36, 28, 0.14);
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.add-address-btn:hover {
+  background: #641d17;
+  border-color: #641d17;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 18px rgba(123, 36, 28, 0.20);
+}
+
+.add-address-btn:active {
+  transform: translateY(0);
+
+  box-shadow:
+    0 4px 10px rgba(123, 36, 28, 0.14);
+}
+
+.add-address-btn:focus-visible {
+  outline: 3px solid rgba(156, 90, 80, 0.22);
+  outline-offset: 3px;
+}
+
+.add-address-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* =====================================
+   ADDRESS EDIT BUTTON
+===================================== */
+
+.address-edit {
+  border: none;
+
+  background: transparent;
+
+  color: #7b241c;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 5px;
+
+  border-radius: 6px;
+}
+
+.address-edit:hover {
+  background: #f5ebe5;
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 650px) {
+
+  .modal-overlay {
+    padding: 10px;
+  }
+
+  .order-detail-modal,
+  .profile-modal,
+  .address-modal {
+    width: 100%;
+
+    max-height: 92vh;
+
+    padding: 20px;
+  }
+
+  .order-modal-header h2 {
+    font-size: 20px;
+  }
+
+  .order-modal-item img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .order-modal-item > b {
+    font-size: 12px;
+  }
+
+  /* ADDRESS */
+
+  .address-modal {
+    border-radius: 14px;
+  }
+
+  .address-modal h2 {
+    font-size: 20px;
+  }
+
+  .address-form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .address-modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .address-modal-actions button {
+    width: 100%;
+  }
+}

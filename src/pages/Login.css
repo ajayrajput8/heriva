@@ -1,0 +1,539 @@
+/* =========================================
+   MADE BY HER
+   LOGIN PAGE
+========================================= */
+
+.login-page {
+  min-height: calc(100vh - 66px);
+
+  background: #f5f0e7;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 50px 20px;
+
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* =========================================
+   DECORATIVE BACKGROUND
+========================================= */
+
+.login-decoration {
+  position: absolute;
+
+  font-size: 180px;
+
+  line-height: 1;
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+.login-decoration-left {
+  left: -25px;
+  top: 80px;
+
+  color: rgba(169, 75, 57, 0.08);
+}
+
+.login-decoration-right {
+  right: -25px;
+  bottom: 30px;
+
+  color: rgba(85, 118, 77, 0.08);
+}
+
+
+/* =========================================
+   LOGIN CARD
+========================================= */
+
+.login-card {
+  width: 100%;
+  max-width: 430px;
+
+  background: #fffefa;
+
+  border: 1px solid #e4ddd2;
+
+  border-radius: 12px;
+
+  padding: 36px 38px;
+
+  position: relative;
+  z-index: 2;
+
+  box-shadow:
+    0 15px 45px rgba(50, 40, 25, 0.08);
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.login-logo {
+  text-align: center;
+
+  margin-bottom: 28px;
+}
+
+.login-logo-icon {
+  color: #a94b39;
+
+  font-size: 38px;
+
+  line-height: 1;
+
+  margin-bottom: 3px;
+}
+
+.login-logo h1 {
+  margin: 0;
+
+  color: #a94b39;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: 28px;
+
+  font-weight: 600;
+
+  line-height: 1.1;
+}
+
+.login-logo p {
+  margin: 5px 0 0;
+
+  color: #8b8378;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 0.5px;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.login-heading {
+  text-align: center;
+
+  margin-bottom: 24px;
+}
+
+.login-heading h2 {
+  margin: 0;
+
+  color: #193128;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: 27px;
+
+  font-weight: 600;
+
+  line-height: 1.15;
+}
+
+.login-heading p {
+  margin: 6px 0 0;
+
+  color: #777;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.login-error {
+  background: #fbe8e5;
+
+  border: 1px solid #efc6c0;
+
+  color: #a33e31;
+
+  border-radius: 6px;
+
+  padding: 10px 12px;
+
+  margin-bottom: 15px;
+
+  font-size: 10px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================
+   LABELS
+========================================= */
+
+.login-label {
+  display: block;
+
+  color: #303a34;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  margin-bottom: 6px;
+}
+
+.password-label {
+  margin-top: 16px;
+}
+
+
+/* =========================================
+   INPUT
+========================================= */
+
+.login-input-wrapper {
+  width: 100%;
+
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 12px;
+
+  background: #fff;
+
+  border: 1px solid #ddd6cb;
+
+  border-radius: 6px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.login-input-wrapper:focus-within {
+  border-color: #a94b39;
+
+  box-shadow:
+    0 0 0 2px rgba(169, 75, 57, 0.08);
+}
+
+.login-input-icon {
+  color: #817a71;
+
+  flex-shrink: 0;
+}
+
+.login-input {
+  width: 100%;
+
+  height: 100%;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  color: #29352f;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 11px;
+}
+
+.login-input::placeholder {
+  color: #aaa;
+}
+
+
+/* =========================================
+   PASSWORD TOGGLE
+========================================= */
+
+.password-toggle {
+  border: none;
+
+  background: transparent;
+
+  padding: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #817a71;
+
+  cursor: pointer;
+
+  transition: color 0.2s ease;
+}
+
+.password-toggle:hover {
+  color: #a94b39;
+}
+
+
+/* =========================================
+   FORGOT PASSWORD
+========================================= */
+
+.forgot-wrapper {
+  display: flex;
+
+  justify-content: flex-end;
+
+  margin-top: 8px;
+}
+
+.forgot-password {
+  border: none;
+
+  background: transparent;
+
+  padding: 0;
+
+  color: #a94b39;
+
+  font-size: 10px;
+
+  cursor: pointer;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   LOGIN BUTTON
+========================================= */
+
+.login-submit {
+  width: 100%;
+
+  height: 44px;
+
+  margin-top: 20px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: #a94b39;
+
+  color: #fff;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.1s ease;
+}
+
+.login-submit:hover {
+  background: #913d2e;
+}
+
+.login-submit:active {
+  transform: translateY(1px);
+}
+
+.login-submit:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================
+   DIVIDER
+========================================= */
+
+.login-divider {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin: 24px 0;
+}
+
+.login-divider span {
+  height: 1px;
+
+  background: #e4ddd4;
+
+  flex: 1;
+}
+
+.login-divider p {
+  margin: 0;
+
+  color: #999;
+
+  font-size: 9px;
+}
+
+
+/* =========================================
+   SIGNUP
+========================================= */
+
+.login-signup {
+  text-align: center;
+
+  margin: 0;
+
+  color: #777;
+
+  font-size: 10px;
+}
+
+.login-signup a {
+  margin-left: 5px;
+
+  color: #a94b39;
+
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.login-signup a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   TRUST
+========================================= */
+
+.login-trust {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  margin-top: 22px;
+
+  padding-top: 17px;
+
+  border-top: 1px solid #eee8df;
+
+  color: #777;
+
+  font-size: 9px;
+}
+
+.login-trust svg {
+  color: #55764d;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .login-page {
+    min-height: calc(100vh - 60px);
+
+    padding: 30px 15px;
+  }
+
+  .login-card {
+    padding: 30px 23px;
+
+    border-radius: 10px;
+  }
+
+  .login-logo h1 {
+    font-size: 25px;
+  }
+
+  .login-heading h2 {
+    font-size: 24px;
+  }
+
+  .login-decoration {
+    font-size: 120px;
+  }
+
+  .login-decoration-left {
+    left: -25px;
+    top: 70px;
+  }
+
+  .login-decoration-right {
+    right: -25px;
+    bottom: 20px;
+  }
+}
+
+
+@media (max-width: 380px) {
+
+  .login-page {
+    padding: 20px 12px;
+  }
+
+  .login-card {
+    padding: 25px 18px;
+  }
+
+  .login-logo {
+    margin-bottom: 22px;
+  }
+
+  .login-heading {
+    margin-bottom: 20px;
+  }
+
+}

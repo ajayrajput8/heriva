@@ -1,0 +1,125 @@
+/* =========================================================
+   MADE BY HER — VILLAGE PARTNER / EARNINGS
+   Dashboard-matched styling
+   ========================================================= */
+
+.partner-earnings-page .dashboard-main { max-width: 1600px; }
+
+/* Exact dashboard sidebar */
+.partner-earnings-page .dashboard-sidebar nav a.dashboard-nav-active {
+  position: relative;
+  color: #fff;
+  background: #a94b39;
+  box-shadow: 0 5px 14px rgba(169, 75, 57, 0.12);
+}
+.partner-earnings-page .dashboard-sidebar nav a.dashboard-nav-active::before {
+  content: ""; position: absolute; left: 0; top: 9px; bottom: 9px;
+  width: 3px; border-radius: 0 3px 3px 0; background: #fff;
+}
+
+.partner-earnings-page .earnings-welcome { box-shadow: 0 10px 30px rgba(61,45,35,.055); border: 1px solid rgba(169,75,57,.08); }
+.partner-earnings-page .earnings-welcome .welcome-content { max-width: 570px; }
+.partner-earnings-page .earnings-error { margin-bottom: 10px; }
+.partner-earnings-page .earnings-dashboard-grid { align-items: start; }
+.earnings-card-subtitle { display:block; margin-top:3px; color:#858b85; font-size:8px; }
+.earnings-export { display:inline-flex; align-items:center; gap:6px; padding:7px 10px; border:1px solid #ddd7ce; border-radius:6px; background:#fffefa; color:#3f4b44; font:600 9px "DM Sans",sans-serif; cursor:pointer; transition:.2s ease; }
+.earnings-export:hover { border-color:#a94b39; color:#a94b39; background:#faf3ec; }
+.partner-earnings-page .partner-stat-card { position:relative; overflow:hidden; transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease; }
+.partner-earnings-page .partner-stat-card::after { content:""; position:absolute; width:80px; height:80px; right:-28px; top:-28px; border-radius:50%; background:rgba(169,75,57,.035); }
+.partner-earnings-page .partner-stat-card:hover { transform:translateY(-2px); border-color:#ddd0c3; box-shadow:0 10px 24px rgba(38,43,38,.07); }
+.partner-earnings-page .partner-stat-card > div { position:relative; z-index:1; }
+.partner-earnings-page .earnings-stat-primary .stat-icon { background:#e4eddf; color:#55764d; }
+.partner-earnings-page .earnings-overview-card { min-height:285px; }
+.full-earnings-chart { height:195px; display:grid; grid-template-columns:repeat(6,1fr); gap:12px; align-items:end; padding:8px 8px 0; border-bottom:1px solid #ddd7ce; }
+.earnings-column { height:100%; min-width:0; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; }
+.earnings-value { min-height:15px; margin-bottom:6px; color:#6d766f; font-size:8px; white-space:nowrap; }
+.earnings-track { width:min(38px,70%); height:135px; display:flex; align-items:flex-end; overflow:hidden; border-radius:5px 5px 0 0; background:#f3eee7; }
+.earnings-bar { width:100%; min-height:4px; border-radius:4px 4px 0 0; background:#9eb59c; transition:height .3s ease; }
+.earnings-column:last-child .earnings-bar { background:#55764d; }
+.earnings-column small { margin-top:7px; color:#777; font-size:8px; }
+.partner-share-card { min-height:285px; }
+.partner-earning-highlight { display:flex; align-items:center; gap:11px; margin-bottom:12px; padding:12px; border-radius:8px; background:#f7eee5; }
+.partner-earning-highlight .stat-icon { width:48px; height:48px; flex-basis:48px; }
+.partner-earning-highlight strong,.partner-earning-highlight span { display:block; }
+.partner-earning-highlight strong { color:#202c25; font:700 25px "Playfair Display",serif; }
+.partner-earning-highlight span { margin-top:2px; color:#6b736d; font-size:9px; }
+.partner-earning-total { padding:13px; border-radius:7px; background:#faf6ef; }
+.partner-earning-total span,.partner-earning-total small { display:block; }
+.partner-earning-total span { color:#a94b39; font-size:9px; }
+.partner-earning-total strong { display:block; margin:4px 0; color:#18231e; font:700 23px "Playfair Display",serif; }
+.partner-earning-total small { color:#438344; font-size:8px; }
+.earning-note { display:flex; align-items:flex-start; gap:7px; margin-top:11px; padding:9px; border:1px solid #e9e0d6; border-radius:7px; background:#fffefa; color:#70766f; font-size:8px; line-height:1.45; }
+.earning-note svg { flex:0 0 auto; color:#a94b39; margin-top:1px; }
+.partner-earnings-page .earnings-transactions-card { overflow:hidden; }
+.partner-earnings-page .earnings-transactions-card .dashboard-card-heading > div { min-width:0; }
+.partner-earnings-page .earnings-transactions-card select { min-width:125px; padding:7px 9px; border:1px solid #ddd7ce; border-radius:5px; outline:none; background:#fff; color:#616963; font-size:8px; }
+.earnings-table-wrapper { overflow-x:auto; border:1px solid #ebe5dd; border-radius:7px; }
+.earnings-table { width:100%; border-collapse:collapse; min-width:580px; }
+.earnings-table th { padding:10px 9px; border-bottom:1px solid #e9e2d9; background:#faf6ef; color:#7d827d; font-size:7px; font-weight:700; letter-spacing:.8px; text-align:left; }
+.earnings-table td { padding:11px 9px; border-bottom:1px solid #eee8df; color:#58615b; font-size:8px; vertical-align:middle; }
+.earnings-table tbody tr:last-child td { border-bottom:0; }
+.earnings-table tbody tr:hover { background:#fffdfa; }
+.earnings-table td b { color:#232d27; font-size:9px; }
+.earning-value { color:#55764d !important; font-weight:700; }
+.earning-status { padding:4px 8px; border-radius:12px; font-size:7px; white-space:nowrap; }
+.earning-status.placed,.earning-status.processing,.earning-status.confirmed { background:#fff0d8; color:#bd761c; }
+.earning-status.shipped { background:#e9f0f6; color:#487394; }
+.earning-status.delivered { background:#e5f1e3; color:#418044; }
+.earning-status.cancelled,.earning-status.canceled { background:#f8e5e1; color:#a94b39; }
+.earnings-table-message { padding:35px 15px !important; color:#777 !important; text-align:center; }
+.earnings-table-footer { display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:12px; color:#80857f; font-size:8px; }
+.earnings-pagination { display:flex; align-items:center; gap:5px; }
+.earnings-pagination button { width:29px; height:29px; display:grid; place-items:center; border:1px solid #e0d8ce; border-radius:6px; background:#fffefa; color:#667069; cursor:pointer; }
+.earnings-pagination button:disabled { opacity:.4; cursor:default; }
+.earnings-pagination .page-active { border-color:#a94b39; background:#a94b39; color:#fff; }
+.earnings-summary-card { padding-bottom:8px; }
+.earnings-summary-row { min-height:42px; display:flex; align-items:center; justify-content:space-between; gap:12px; border-bottom:1px solid #eee8df; }
+.earnings-summary-row:last-child { border-bottom:0; }
+.earnings-summary-row span { color:#6d746e; font-size:9px; }
+.earnings-summary-row strong { color:#202a25; font:600 14px "Playfair Display",serif; }
+.partner-earnings-page .dashboard-card { transition:box-shadow .22s ease,border-color .22s ease; }
+.partner-earnings-page .dashboard-card:hover { border-color:#ded5ca; box-shadow:0 8px 24px rgba(38,43,38,.055); }
+
+/* =========================================================
+   EXACT DASHBOARD MOBILE SIDEBAR
+   ========================================================= */
+.mobile-dashboard-bar,.mobile-sidebar-backdrop,.mobile-dashboard-sidebar { display:none; }
+@media (max-width:900px) {
+  .partner-earnings-page .dashboard-layout { position:relative; display:block; min-height:0; }
+  .mobile-dashboard-bar { position:sticky; top:0; z-index:1000; min-height:54px; padding:8px 10px; display:flex; align-items:center; background:#fffefa; border-bottom:1px solid #e5ddd2; }
+  .mobile-sidebar-toggle { min-height:38px; display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:0 14px; border:1px solid #dfd2c6; border-radius:9px; background:#f8f1e9; color:#6f342a; font-family:inherit; font-size:11px; font-weight:700; cursor:pointer; transition:background .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease; }
+  .mobile-sidebar-toggle:hover { background:#f3e6dc; border-color:#cdb7a8; transform:translateY(-1px); box-shadow:0 5px 14px rgba(70,45,35,.08); }
+  .mobile-sidebar-toggle:active { transform:translateY(0); }
+  .mobile-sidebar-toggle svg { flex:0 0 auto; }
+  .mobile-sidebar-backdrop { position:fixed; inset:0; z-index:1090; display:block; background:rgba(30,24,20,.46); backdrop-filter:blur(2px); animation:earningsMobileSidebarFade .2s ease; }
+  .mobile-dashboard-sidebar { position:fixed; top:0; left:0; bottom:0; z-index:1100; width:min(290px,84vw); display:flex; flex-direction:column; box-sizing:border-box; padding:18px 14px 20px; background:#f7f1e8; border-right:1px solid #e0d4c8; box-shadow:14px 0 32px rgba(38,29,23,.12); animation:earningsMobileSidebarSlide .22s ease; }
+  .mobile-sidebar-header { min-height:50px; display:flex; align-items:center; justify-content:space-between; padding:0 2px 15px; margin-bottom:10px; border-bottom:1px solid #e3d8cd; }
+  .mobile-sidebar-header > div { min-width:0; }
+  .mobile-sidebar-header span,.mobile-sidebar-header strong { display:block; }
+  .mobile-sidebar-header span { margin-bottom:2px; color:#a94b39; font-size:8px; font-weight:800; letter-spacing:1.5px; }
+  .mobile-sidebar-header strong { color:#2c352f; font:600 20px "Playfair Display",serif; }
+  .mobile-sidebar-header > button { width:36px; height:36px; flex:0 0 36px; display:grid; place-items:center; border:1px solid #dfd1c5; border-radius:50%; background:#fffefa; color:#5d5048; cursor:pointer; transition:background .2s ease,transform .2s ease; }
+  .mobile-sidebar-header > button:hover { background:#f1e7de; transform:rotate(90deg); }
+  .mobile-dashboard-sidebar nav { display:grid; gap:5px; }
+  .mobile-dashboard-sidebar nav a { min-height:47px; display:flex; align-items:center; gap:12px; padding:0 14px; border-radius:9px; color:#252d28; text-decoration:none; font-size:12px; font-weight:500; transition:background .2s ease,color .2s ease,transform .2s ease; }
+  .mobile-dashboard-sidebar nav a svg { flex:0 0 auto; }
+  .mobile-dashboard-sidebar nav a:hover { background:#f1e5db; color:#a94b39; transform:translateX(2px); }
+  .mobile-dashboard-sidebar nav a.dashboard-nav-active { background:#a94b39; color:#fff; box-shadow:0 6px 16px rgba(169,75,57,.16); }
+  .mobile-sidebar-quote { margin-top:auto; padding:20px 8px 5px; color:#a94b39; font:500 22px/1.1 Caveat,cursive; transform:rotate(-4deg); }
+  .mobile-sidebar-quote span { display:block; }
+  .partner-earnings-page .dashboard-sidebar { display:none; }
+  .partner-earnings-page .dashboard-main { width:100%; max-width:none; box-sizing:border-box; }
+}
+@media (max-width:650px) {
+  .mobile-dashboard-bar { min-height:50px; padding:7px 10px; }
+  .mobile-sidebar-toggle { min-height:36px; padding:0 12px; font-size:10px; }
+  .mobile-dashboard-sidebar { width:min(275px,86vw); }
+  .mobile-sidebar-header strong { font-size:18px; }
+}
+@keyframes earningsMobileSidebarSlide { from { opacity:0; transform:translateX(-24px); } to { opacity:1; transform:translateX(0); } }
+@keyframes earningsMobileSidebarFade { from { opacity:0; } to { opacity:1; } }
+
+/* Existing earnings responsive rules */
+@media (max-width:1200px) { .partner-earnings-page .dashboard-two-column { grid-template-columns:1fr; } .partner-earnings-page .dashboard-right-column { grid-template-columns:1fr 1fr; } }
+@media (max-width:900px) { .partner-earnings-page .dashboard-right-column { grid-template-columns:1fr; } .full-earnings-chart { gap:6px; } }
+@media (max-width:650px) { .partner-earnings-page .earnings-welcome { height:auto; min-height:300px; } .partner-earnings-page .earnings-welcome .welcome-content { max-width:none; } .full-earnings-chart { height:165px; grid-template-columns:repeat(6,minmax(34px,1fr)); overflow-x:auto; padding-bottom:4px; } .earnings-track { height:110px; } .earnings-value { font-size:7px; } .earnings-table-footer { align-items:flex-start; flex-direction:column; } }
