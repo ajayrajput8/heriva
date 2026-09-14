@@ -11,7 +11,7 @@ import {
 
 import "./Login.css";
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = "https://heriva-backend.onrender.com/api";
 
 export default function Login() {
   const navigate = useNavigate();

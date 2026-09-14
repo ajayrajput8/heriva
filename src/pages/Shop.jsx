@@ -8,7 +8,7 @@ import { useSearchParams } from "react-router-dom";
 
 import ProductCard from "../components/ProductCard";
 
-const API_BASE = "http://localhost:8080/api";
+const API_BASE = "https://heriva-backend.onrender.com/api";
 
 export default function Shop() {
   const [params] = useSearchParams();

@@ -12,7 +12,7 @@ import {
   Package,
 } from "lucide-react";
 
-const API_BASE = "http://localhost:8080/api";
+const API_BASE = "https://heriva-backend.onrender.com/api";
 
 export default function OurWomen() {
   const [women, setWomen] = useState([]);

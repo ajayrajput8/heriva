@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { categories } from "../data/products";
 import ProductCard from "../components/ProductCard";
 
-const API = "http://localhost:8080/api";
+const API = "https://heriva-backend.onrender.com/api";
 
 export default function Home() {
   const [featured, setFeatured] = useState([]);

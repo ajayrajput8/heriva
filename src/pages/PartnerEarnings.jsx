@@ -25,7 +25,7 @@ import {
 import "./VillagePartnerDashboard.css";
 import "./PartnerEarnings.css";
 
-const API = "http://localhost:8080/api";
+const API = "https://heriva-backend.onrender.com/api";
 const PARTNER_SHARE = 0.10; // fallback until backend ledger values are authoritative
 const PAGE_SIZE = 8;
 

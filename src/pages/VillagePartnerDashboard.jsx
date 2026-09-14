@@ -18,7 +18,7 @@ import {
 
 import "./VillagePartnerDashboard.css";
 
-const API = "http://localhost:8080/api";
+const API = "https://heriva-backend.onrender.com/api";
 
 
 // ============================================================

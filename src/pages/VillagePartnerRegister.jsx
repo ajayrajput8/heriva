@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./VillagePartnerRegister.css";
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = "https://heriva-backend.onrender.com/api";
 
 export default function VillagePartnerRegister() {
   const navigate = useNavigate();

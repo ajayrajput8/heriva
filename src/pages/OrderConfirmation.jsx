@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import "./OrderConfirmation.css";
-const API_BASE = "http://localhost:8080/api";
+const API_BASE = "https://heriva-backend.onrender.com/api";
 
 function getToken() {
   return (

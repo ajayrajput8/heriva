@@ -30,7 +30,7 @@ import {
 import "../pages/VillagePartnerDashboard.css";
 import "./ManageWomen.css";
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = "https://heriva-backend.onrender.com/api";
 
 export default function ManageWomen() {
   const [women, setWomen] = useState([]);

@@ -25,7 +25,7 @@ import {
 import "./VillagePartnerDashboard.css";
 import "./PartnerOrders.css";
 
-const API = "http://localhost:8080/api";
+const API = "https://heriva-backend.onrender.com/api";
 
 function getToken() {
   return localStorage.getItem("token") || sessionStorage.getItem("token") || "";

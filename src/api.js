@@ -2,7 +2,7 @@
 // Current Spring Boot backend runs on http://localhost:8080.
 // Replace the functions below with your exact auth/token flow as the UI is connected.
 
-export const API_BASE_URL = "http://localhost:8080/api";
+export const API_BASE_URL = "https://heriva-backend.onrender.com/api";
 
 async function request(path, options = {}) {
   const token = localStorage.getItem("token");
