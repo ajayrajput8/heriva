@@ -2161,3 +2161,265 @@ nav a svg {
     }
   }
 }
+
+
+/* =========================================================
+   DEFINITIVE FIX — MOBILE ADD/EDIT WOMAN MODAL SCROLL
+   The overlay owns the scroll; the modal remains full-content.
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  html,
+  body {
+    overscroll-behavior: none;
+  }
+
+  .woman-modal-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+
+    width: 100vw !important;
+    height: 100dvh !important;
+    min-height: 100vh !important;
+
+    display: block !important;
+
+    padding: 12px !important;
+    box-sizing: border-box !important;
+
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior-y: contain !important;
+
+    touch-action: pan-y !important;
+  }
+
+  .woman-modal-overlay > .woman-modal {
+    position: relative !important;
+
+    width: min(650px, 100%) !important;
+    max-width: 650px !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+
+    /* Critical: do NOT create a second scroll container */
+    max-height: none !important;
+    overflow: visible !important;
+
+    margin: 0 auto 20px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+
+    box-sizing: border-box !important;
+
+    flex: none !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > .modal-header {
+    flex: none !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > form {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+
+    flex: none !important;
+
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > form > .modal-form-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+
+    gap: 14px !important;
+  }
+
+  .woman-modal-overlay > .woman-modal .modal-field,
+  .woman-modal-overlay > .woman-modal .modal-field.full,
+  .woman-modal-overlay > .woman-modal .active-checkbox {
+    grid-column: 1 !important;
+    min-width: 0 !important;
+  }
+
+  .woman-modal .modal-field input,
+  .woman-modal .modal-field textarea,
+  .woman-modal .image-upload-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Nothing sticky/fixed inside the modal */
+  .woman-modal-overlay .modal-actions,
+  .woman-modal-overlay .modal-cancel,
+  .woman-modal-overlay .modal-save {
+    position: static !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > form > .modal-actions {
+    width: 100% !important;
+
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+
+    gap: 8px !important;
+
+    margin-top: 20px !important;
+    padding-top: 16px !important;
+    padding-bottom: 4px !important;
+
+    box-sizing: border-box !important;
+  }
+
+  .woman-modal .modal-cancel,
+  .woman-modal .modal-save {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+  }
+}
+
+@media (max-width: 550px) {
+
+  .woman-modal-overlay {
+    padding: 8px !important;
+  }
+
+  .woman-modal-overlay > .woman-modal {
+    width: 100% !important;
+    margin-bottom: 16px !important;
+    padding: 17px !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > .modal-header {
+    margin-bottom: 15px !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > .modal-header h2 {
+    font-size: 24px !important;
+  }
+}
+
+@media (max-width: 380px) {
+
+  .woman-modal-overlay {
+    padding: 6px !important;
+  }
+
+  .woman-modal-overlay > .woman-modal {
+    padding: 14px !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > .modal-header h2 {
+    font-size: 22px !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > form > .modal-actions {
+    padding-bottom: 6px !important;
+  }
+}
+
+
+/* =========================================================
+   LAPTOP / DESKTOP FIX — ADD / EDIT WOMAN MODAL SCROLL
+   Mobile behavior above remains unchanged.
+   ========================================================= */
+
+@media (min-width: 901px) {
+
+  .woman-modal-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 100vw !important;
+    height: 100vh !important;
+
+    padding: 20px !important;
+    box-sizing: border-box !important;
+
+    overflow: hidden !important;
+    overscroll-behavior: none !important;
+  }
+
+  .woman-modal-overlay > .woman-modal {
+    width: min(650px, calc(100vw - 40px)) !important;
+    max-width: 650px !important;
+
+    /* Important: constrain the modal to the laptop viewport */
+    height: min(90vh, 760px) !important;
+    max-height: calc(100vh - 40px) !important;
+    min-height: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    margin: 0 !important;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    box-sizing: border-box !important;
+
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+
+    scrollbar-width: thin;
+    scrollbar-color: #cbb8aa transparent;
+  }
+
+  .woman-modal-overlay > .woman-modal::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  .woman-modal-overlay > .woman-modal::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .woman-modal-overlay > .woman-modal::-webkit-scrollbar-thumb {
+    background: #cbb8aa;
+    border-radius: 20px;
+  }
+
+  .woman-modal-overlay > .woman-modal::-webkit-scrollbar-thumb:hover {
+    background: #a94b39;
+  }
+
+  /* Keep title visible at the top while the form scrolls */
+  .woman-modal-overlay > .woman-modal > .modal-header {
+    flex: 0 0 auto !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > form {
+    flex: 0 0 auto !important;
+    min-height: max-content !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > form > .modal-form-grid {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > form > .modal-actions {
+    flex: 0 0 auto !important;
+    padding-bottom: 4px !important;
+  }
+}

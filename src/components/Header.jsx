@@ -262,7 +262,7 @@ export default function Header() {
 
           <span>
             <strong>
-              Made By Her
+              Kaarika
             </strong>
 
             <small>
