@@ -3,9 +3,12 @@
    LOGIN PAGE
 ========================================= */
 
+* {
+  box-sizing: border-box;
+}
+
 .login-page {
   min-height: calc(100vh - 66px);
-
   background: #f5f0e7;
 
   display: flex;
@@ -13,11 +16,11 @@
   justify-content: center;
 
   padding: 50px 20px;
-
   position: relative;
   overflow: hidden;
-}
 
+  box-sizing: border-box;
+}
 
 /* =========================================
    DECORATIVE BACKGROUND
@@ -25,30 +28,24 @@
 
 .login-decoration {
   position: absolute;
-
   font-size: 180px;
-
   line-height: 1;
 
   user-select: none;
-
   pointer-events: none;
 }
 
 .login-decoration-left {
   left: -25px;
   top: 80px;
-
   color: rgba(169, 75, 57, 0.08);
 }
 
 .login-decoration-right {
   right: -25px;
   bottom: 30px;
-
   color: rgba(85, 118, 77, 0.08);
 }
-
 
 /* =========================================
    LOGIN CARD
@@ -59,9 +56,7 @@
   max-width: 430px;
 
   background: #fffefa;
-
   border: 1px solid #e4ddd2;
-
   border-radius: 12px;
 
   padding: 36px 38px;
@@ -69,10 +64,11 @@
   position: relative;
   z-index: 2;
 
+  box-sizing: border-box;
+
   box-shadow:
     0 15px 45px rgba(50, 40, 25, 0.08);
 }
-
 
 /* =========================================
    LOGO
@@ -80,17 +76,13 @@
 
 .login-logo {
   text-align: center;
-
   margin-bottom: 28px;
 }
 
 .login-logo-icon {
   color: #a94b39;
-
   font-size: 38px;
-
   line-height: 1;
-
   margin-bottom: 3px;
 }
 
@@ -105,9 +97,7 @@
     serif;
 
   font-size: 28px;
-
   font-weight: 600;
-
   line-height: 1.1;
 }
 
@@ -117,12 +107,9 @@
   color: #8b8378;
 
   font-family: "DM Sans", sans-serif;
-
   font-size: 9px;
-
   letter-spacing: 0.5px;
 }
-
 
 /* =========================================
    HEADING
@@ -130,7 +117,6 @@
 
 .login-heading {
   text-align: center;
-
   margin-bottom: 24px;
 }
 
@@ -145,9 +131,7 @@
     serif;
 
   font-size: 27px;
-
   font-weight: 600;
-
   line-height: 1.15;
 }
 
@@ -157,10 +141,8 @@
   color: #777;
 
   font-size: 11px;
-
   line-height: 1.5;
 }
-
 
 /* =========================================
    ERROR
@@ -168,22 +150,20 @@
 
 .login-error {
   background: #fbe8e5;
-
   border: 1px solid #efc6c0;
 
   color: #a33e31;
 
   border-radius: 6px;
-
   padding: 10px 12px;
 
   margin-bottom: 15px;
 
   font-size: 10px;
-
   line-height: 1.4;
-}
 
+  box-sizing: border-box;
+}
 
 /* =========================================
    LABELS
@@ -195,7 +175,6 @@
   color: #303a34;
 
   font-size: 11px;
-
   font-weight: 600;
 
   margin-bottom: 6px;
@@ -205,33 +184,35 @@
   margin-top: 16px;
 }
 
-
 /* =========================================
-   INPUT
+   INPUT WRAPPER
+
+   The wrapper is position: relative so the
+   eye button is ALWAYS inside the box.
 ========================================= */
 
 .login-input-wrapper {
-  width: 100%;
+  position: relative;
 
+  width: 100%;
   height: 44px;
 
   display: flex;
-
   align-items: center;
 
-  gap: 10px;
-
-  padding: 0 12px;
-
-  background: #fff;
+  background: #ffffff;
 
   border: 1px solid #ddd6cb;
-
   border-radius: 6px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
 
   transition:
     border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .login-input-wrapper:focus-within {
@@ -241,63 +222,152 @@
     0 0 0 2px rgba(169, 75, 57, 0.08);
 }
 
+/* =========================================
+   LEFT INPUT ICON
+========================================= */
+
 .login-input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 17px;
+  height: 17px;
+
   color: #817a71;
 
+  pointer-events: none;
+  z-index: 2;
+
+  display: block;
   flex-shrink: 0;
 }
 
+/* =========================================
+   TEXT / PASSWORD INPUT
+========================================= */
+
 .login-input {
   width: 100%;
-
+  min-width: 0;
+  max-width: none;
   height: 100%;
 
   border: none;
-
   outline: none;
-
   background: transparent;
 
   color: #29352f;
 
   font-family: "DM Sans", sans-serif;
-
   font-size: 11px;
+  line-height: 1.2;
+
+  /* Space for left icon + right eye button */
+  padding: 0 44px 0 42px;
+
+  box-sizing: border-box;
+}
+
+.login-input:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
 }
 
 .login-input::placeholder {
   color: #aaa;
+  opacity: 1;
 }
 
+/* Remove Chrome/Safari autofill blue background */
+.login-input:-webkit-autofill,
+.login-input:-webkit-autofill:hover,
+.login-input:-webkit-autofill:focus,
+.login-input:-webkit-autofill:active {
+  -webkit-text-fill-color: #29352f;
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
+  box-shadow: 0 0 0 1000px #ffffff inset;
+  transition: background-color 9999s ease-in-out 0s;
+  caret-color: #29352f;
+}
 
 /* =========================================
    PASSWORD TOGGLE
+
+   Absolutely positioned INSIDE the wrapper.
+   This prevents the eye from appearing outside
+   the password field at any screen size.
 ========================================= */
 
 .password-toggle {
-  border: none;
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
 
-  background: transparent;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  max-width: 32px;
+  min-height: 32px;
+  max-height: 32px;
 
   padding: 0;
+  margin: 0;
 
   display: flex;
-
   align-items: center;
-
   justify-content: center;
+
+  border: none;
+  outline: none;
+  background: transparent;
 
   color: #817a71;
 
   cursor: pointer;
 
-  transition: color 0.2s ease;
+  border-radius: 5px;
+  box-sizing: border-box;
+
+  z-index: 5;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .password-toggle:hover {
   color: #a94b39;
+  background: #f7eee9;
 }
 
+.password-toggle:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.password-toggle:focus-visible {
+  outline: 2px solid rgba(169, 75, 57, 0.28);
+  outline-offset: -1px;
+}
+
+.password-toggle:active {
+  background: #f2e7e0;
+}
+
+.password-toggle svg {
+  width: 17px;
+  height: 17px;
+
+  display: block;
+  flex: 0 0 auto;
+  flex-shrink: 0;
+
+  pointer-events: none;
+}
 
 /* =========================================
    FORGOT PASSWORD
@@ -305,7 +375,6 @@
 
 .forgot-wrapper {
   display: flex;
-
   justify-content: flex-end;
 
   margin-top: 8px;
@@ -313,14 +382,16 @@
 
 .forgot-password {
   border: none;
-
   background: transparent;
 
   padding: 0;
+  margin: 0;
 
   color: #a94b39;
 
+  font-family: "DM Sans", sans-serif;
   font-size: 10px;
+  line-height: 1.3;
 
   cursor: pointer;
 }
@@ -329,6 +400,15 @@
   text-decoration: underline;
 }
 
+.forgot-password:focus {
+  outline: none;
+}
+
+.forgot-password:focus-visible {
+  outline: 2px solid rgba(169, 75, 57, 0.25);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
 
 /* =========================================
    LOGIN BUTTON
@@ -336,34 +416,30 @@
 
 .login-submit {
   width: 100%;
-
   height: 44px;
 
   margin-top: 20px;
+  padding: 0 16px;
 
   border: none;
-
   border-radius: 6px;
 
   background: #a94b39;
-
   color: #fff;
 
   font-family: "DM Sans", sans-serif;
-
   font-size: 12px;
-
   font-weight: 600;
 
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
   gap: 8px;
 
   cursor: pointer;
+
+  box-sizing: border-box;
 
   transition:
     background 0.2s ease,
@@ -380,10 +456,22 @@
 
 .login-submit:disabled {
   opacity: 0.6;
-
   cursor: not-allowed;
 }
 
+.login-submit:focus {
+  outline: none;
+}
+
+.login-submit:focus-visible {
+  outline: 2px solid rgba(169, 75, 57, 0.35);
+  outline-offset: 2px;
+}
+
+.login-submit svg {
+  display: block;
+  flex-shrink: 0;
+}
 
 /* =========================================
    DIVIDER
@@ -391,7 +479,6 @@
 
 .login-divider {
   display: flex;
-
   align-items: center;
 
   gap: 12px;
@@ -413,8 +500,8 @@
   color: #999;
 
   font-size: 9px;
+  line-height: 1;
 }
-
 
 /* =========================================
    SIGNUP
@@ -428,6 +515,7 @@
   color: #777;
 
   font-size: 10px;
+  line-height: 1.5;
 }
 
 .login-signup a {
@@ -444,22 +532,18 @@
   text-decoration: underline;
 }
 
-
 /* =========================================
    TRUST
 ========================================= */
 
 .login-trust {
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
   gap: 7px;
 
   margin-top: 22px;
-
   padding-top: 17px;
 
   border-top: 1px solid #eee8df;
@@ -467,39 +551,106 @@
   color: #777;
 
   font-size: 9px;
+  line-height: 1.4;
+
+  text-align: center;
 }
 
 .login-trust svg {
   color: #55764d;
-
   flex-shrink: 0;
+  display: block;
 }
 
+/* =========================================
+   TABLETS / SMALL DESKTOP
+========================================= */
+
+@media (max-width: 900px) {
+  .login-page {
+    padding: 40px 18px;
+  }
+
+  .login-card {
+    max-width: 430px;
+  }
+}
 
 /* =========================================
-   RESPONSIVE
+   MOBILE
 ========================================= */
 
 @media (max-width: 600px) {
-
   .login-page {
     min-height: calc(100vh - 60px);
-
     padding: 30px 15px;
   }
 
   .login-card {
+    width: 100%;
+    max-width: 430px;
     padding: 30px 23px;
-
     border-radius: 10px;
+  }
+
+  .login-logo {
+    margin-bottom: 24px;
   }
 
   .login-logo h1 {
     font-size: 25px;
   }
 
+  .login-logo-icon {
+    font-size: 35px;
+  }
+
+  .login-heading {
+    margin-bottom: 22px;
+  }
+
   .login-heading h2 {
     font-size: 24px;
+  }
+
+  .login-heading p {
+    font-size: 10.5px;
+  }
+
+  .login-input-wrapper {
+    height: 46px;
+    border-radius: 7px;
+  }
+
+  .login-input {
+    font-size: 13px;
+    padding-left: 42px;
+    padding-right: 43px;
+  }
+
+  .login-input-icon {
+    left: 12px;
+    width: 17px;
+    height: 17px;
+  }
+
+  .password-toggle {
+    right: 6px;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    max-width: 32px;
+    min-height: 32px;
+    max-height: 32px;
+  }
+
+  .password-toggle svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .login-submit {
+    height: 46px;
   }
 
   .login-decoration {
@@ -517,23 +668,165 @@
   }
 }
 
+/* =========================================
+   SMALL PHONES
+========================================= */
 
-@media (max-width: 380px) {
-
+@media (max-width: 420px) {
   .login-page {
-    padding: 20px 12px;
+    padding: 22px 12px;
   }
 
   .login-card {
-    padding: 25px 18px;
+    padding: 26px 18px;
+    border-radius: 9px;
   }
 
   .login-logo {
     margin-bottom: 22px;
   }
 
+  .login-logo-icon {
+    font-size: 33px;
+  }
+
+  .login-logo h1 {
+    font-size: 23px;
+  }
+
+  .login-logo p {
+    font-size: 8.5px;
+  }
+
   .login-heading {
     margin-bottom: 20px;
   }
 
+  .login-heading h2 {
+    font-size: 22px;
+  }
+
+  .login-heading p {
+    font-size: 10px;
+  }
+
+  .login-label {
+    font-size: 10.5px;
+  }
+
+  .login-input-wrapper {
+    height: 44px;
+  }
+
+  .login-input {
+    font-size: 12px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .login-input-icon {
+    left: 11px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .password-toggle {
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    max-width: 30px;
+    min-height: 30px;
+    max-height: 30px;
+  }
+
+  .password-toggle svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .forgot-password {
+    font-size: 9.5px;
+  }
+
+  .login-submit {
+    height: 44px;
+    font-size: 11.5px;
+  }
+
+  .login-divider {
+    gap: 10px;
+    margin: 21px 0;
+  }
+
+  .login-signup {
+    font-size: 9.5px;
+  }
+
+  .login-trust {
+    font-size: 8.5px;
+    margin-top: 20px;
+    padding-top: 15px;
+  }
+
+  .login-decoration {
+    font-size: 100px;
+  }
+}
+
+/* =========================================
+   VERY SMALL PHONES
+========================================= */
+
+@media (max-width: 350px) {
+  .login-page {
+    padding: 18px 10px;
+  }
+
+  .login-card {
+    padding: 23px 15px;
+  }
+
+  .login-logo h1 {
+    font-size: 21px;
+  }
+
+  .login-heading h2 {
+    font-size: 20px;
+  }
+
+  .login-heading p {
+    font-size: 9px;
+  }
+
+  .login-input-wrapper {
+    height: 42px;
+  }
+
+  .login-input {
+    font-size: 11.5px;
+    padding-left: 38px;
+    padding-right: 38px;
+  }
+
+  .login-input-icon {
+    left: 10px;
+    width: 15px;
+    height: 15px;
+  }
+
+  .password-toggle {
+    right: 4px;
+    width: 29px;
+    height: 29px;
+    min-width: 29px;
+    max-width: 29px;
+    min-height: 29px;
+    max-height: 29px;
+  }
+
+  .password-toggle svg {
+    width: 15px;
+    height: 15px;
+  }
 }

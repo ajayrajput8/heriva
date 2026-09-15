@@ -26,13 +26,7 @@ export default function Shop() {
   );
 
   const [maxPrice, setMaxPrice] = useState(5000);
-
-  const [selectedMaterials, setSelectedMaterials] =
-    useState([]);
-
   const [village, setVillage] = useState("");
-
-  // Mobile filter drawer
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   /* =========================================================
@@ -131,25 +125,6 @@ export default function Shop() {
   }
 
   /* =========================================================
-     MATERIAL TOGGLE
-     ========================================================= */
-
-  function toggleMaterial(material) {
-    setSelectedMaterials((current) => {
-      if (current.includes(material)) {
-        return current.filter(
-          (item) => item !== material
-        );
-      }
-
-      return [
-        ...current,
-        material,
-      ];
-    });
-  }
-
-  /* =========================================================
      FILTER PRODUCTS
      ========================================================= */
 
@@ -220,28 +195,6 @@ export default function Shop() {
       });
     }
 
-    /* MATERIAL */
-
-    if (selectedMaterials.length > 0) {
-      data = data.filter((product) => {
-        const productText = [
-          product?.name,
-          product?.description,
-          product?.category?.name,
-        ]
-          .filter(Boolean)
-          .join(" ")
-          .toLowerCase();
-
-        return selectedMaterials.some(
-          (material) =>
-            productText.includes(
-              material.toLowerCase()
-            )
-        );
-      });
-    }
-
     /* SORT */
 
     if (sort === "low") {
@@ -285,7 +238,6 @@ export default function Shop() {
     search,
     sort,
     maxPrice,
-    selectedMaterials,
     village,
   ]);
 
@@ -296,12 +248,9 @@ export default function Shop() {
   function resetFilters() {
     setCategory("");
     setMaxPrice(5000);
-    setSelectedMaterials([]);
     setVillage("");
     setSearch("");
     setSort("newest");
-
-    // Close mobile drawer after reset
     setFiltersOpen(false);
   }
 
@@ -455,37 +404,6 @@ export default function Shop() {
               MATERIALS
               ================================================= */}
 
-          <h4>
-            Materials
-          </h4>
-
-          {[
-            "Cotton",
-            "Jute",
-            "Terracotta",
-            "Wood",
-            "Natural Dyes",
-            "Recycled",
-            "Others",
-          ].map((material) => (
-
-            <label
-              key={material}
-            >
-              <input
-                type="checkbox"
-                checked={selectedMaterials.includes(
-                  material
-                )}
-                onChange={() =>
-                  toggleMaterial(material)
-                }
-              />
-
-              {material}
-            </label>
-
-          ))}
 
           {/* =================================================
               VILLAGES

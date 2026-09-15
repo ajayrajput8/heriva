@@ -1081,3 +1081,200 @@
   }
 }
 
+/* =========================================================
+   PARTNER ORDER STATUS UPDATE
+========================================================= */
+
+.partner-order-status-update-row {
+  align-items: center;
+  gap: 20px;
+}
+
+.partner-order-current-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.partner-order-status-caption {
+  color: #817970;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   STATUS EDITOR
+========================================================= */
+
+.partner-order-status-editor {
+  margin-top: 18px;
+  padding: 15px;
+
+  border: 1px solid #e6ddd3;
+  border-radius: 9px;
+
+  background: #fbf7f1;
+}
+
+.partner-order-status-editor-heading {
+  margin-bottom: 12px;
+}
+
+.partner-order-status-editor-heading strong {
+  display: block;
+
+  color: #303731;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.partner-order-status-editor-heading span {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #7b817b;
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   CONTROLS
+========================================================= */
+
+.partner-order-status-editor-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 145px;
+
+  gap: 8px;
+}
+
+.partner-order-status-editor-controls select {
+  width: 100%;
+  height: 40px;
+
+  min-width: 0;
+
+  padding: 0 11px;
+
+  border: 1px solid #dcd3c9;
+  border-radius: 7px;
+
+  outline: none;
+
+  background: #ffffff;
+  color: #39413b;
+
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+}
+
+.partner-order-status-editor-controls select:focus {
+  border-color: #a94b39;
+
+  box-shadow:
+    0 0 0 3px rgba(169, 75, 57, 0.08);
+}
+
+
+/* =========================================================
+   UPDATE BUTTON
+========================================================= */
+
+.partner-order-status-update-btn {
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 15px;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: #a94b39;
+  color: #ffffff;
+
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.partner-order-status-update-btn:hover:not(:disabled) {
+  background: #913d2e;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 15px rgba(169, 75, 57, 0.16);
+}
+
+.partner-order-status-update-btn:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.partner-order-status-update-error {
+  margin-top: 9px;
+
+  padding: 8px 10px;
+
+  border: 1px solid #efcec8;
+  border-radius: 6px;
+
+  background: #f9e5e1;
+  color: #a33d30;
+
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .partner-order-status-update-row {
+    align-items: flex-start;
+  }
+
+  .partner-order-status-editor {
+    margin-top: 14px;
+    padding: 12px;
+  }
+
+  .partner-order-status-editor-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .partner-order-status-update-btn {
+    width: 100%;
+  }
+}

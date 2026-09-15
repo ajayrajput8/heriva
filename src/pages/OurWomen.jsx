@@ -583,7 +583,7 @@ export default function OurWomen() {
                         alt={name}
                         onError={(event) => {
                           event.currentTarget.src =
-                            "/assets/women-reference.jpg";
+                            "/assets/def-women.png";
                         }}
                       />
 
@@ -721,7 +721,7 @@ export default function OurWomen() {
                 )}
                 onError={(event) => {
                   event.currentTarget.src =
-                    "/assets/women-reference.jpg";
+                    "/assets/def-women.png";
                 }}
               />
 

@@ -150,7 +150,7 @@ export default function VillagePartners() {
       <section className="dashboard-preview section">
 
         <img
-          src="/assets/partners-reference.jpg"
+          src="/assets/vp-banner.png"
           alt="Partner dashboard preview"
         />
 

@@ -190,6 +190,9 @@ export default function PartnerOrders() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [statusUpdating, setStatusUpdating] = useState(false);
+  const [statusUpdateError, setStatusUpdateError] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("");
   const [page, setPage] = useState(1);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
@@ -296,8 +299,94 @@ export default function PartnerOrders() {
     safePage * pageSize
   );
 
-  const openOrder = (order) => setSelectedOrder(order);
-  const closeOrder = () => setSelectedOrder(null);
+  async function handleStatusUpdate() {
+    if (!selectedOrder?.id) {
+      setStatusUpdateError("Order information is missing.");
+      return;
+    }
+
+    if (!selectedStatus) {
+      setStatusUpdateError("Please select an order status.");
+      return;
+    }
+
+    const currentStatus = getStatus(selectedOrder);
+
+    if (currentStatus === selectedStatus) {
+      setStatusUpdateError("Please select a different status.");
+      return;
+    }
+
+    try {
+      setStatusUpdating(true);
+      setStatusUpdateError("");
+
+      const updatedOrder = await apiRequest(
+        `/orders/${selectedOrder.id}/status?status=${encodeURIComponent(
+          selectedStatus
+        )}`,
+        {
+          method: "PATCH",
+        }
+      );
+
+      /*
+      * Update selected modal order.
+      *
+      * Some backend versions return the updated order.
+      * Some may return a simple response. This handles both.
+      */
+      const nextOrder =
+        updatedOrder &&
+        typeof updatedOrder === "object" &&
+        updatedOrder.id
+          ? updatedOrder
+          : {
+              ...selectedOrder,
+              status: selectedStatus,
+            };
+
+      setSelectedOrder(nextOrder);
+
+      /*
+      * Update the order inside the orders list
+      * without needing to refresh the whole page.
+      */
+      setOrders((currentOrders) =>
+        currentOrders.map((order) =>
+          Number(order?.id) === Number(selectedOrder.id)
+            ? {
+                ...order,
+                ...nextOrder,
+                status: selectedStatus,
+              }
+            : order
+        )
+      );
+    } catch (err) {
+      console.error("Order status update error:", err);
+
+      setStatusUpdateError(
+        err?.message || "Unable to update the order status."
+      );
+    } finally {
+      setStatusUpdating(false);
+    }
+  }
+
+  const openOrder = (order) => {
+    setSelectedOrder(order);
+    setSelectedStatus(getStatus(order));
+    setStatusUpdateError("");
+  };
+
+  const closeOrder = () => {
+    if (statusUpdating) return;
+
+    setSelectedOrder(null);
+    setSelectedStatus("");
+    setStatusUpdateError("");
+  };
 
   if (loading) {
     return (
@@ -808,13 +897,97 @@ export default function PartnerOrders() {
               </button>
             </div>
 
-            <div className="partner-order-modal-status-row">
-              <span className={`order-status ${getStatusClass(getStatus(selectedOrder))}`}>
-                {getStatusLabel(getStatus(selectedOrder))}
-              </span>
-              <strong>{money(getPartnerAmount(selectedOrder, partner?.id))}</strong>
+            <div className="partner-order-modal-status-row partner-order-status-update-row">
+              <div className="partner-order-current-status">
+                <span className="partner-order-status-caption">
+                  Current Status
+                </span>
+
+                <span
+                  className={`order-status ${getStatusClass(
+                    getStatus(selectedOrder)
+                  )}`}
+                >
+                  {getStatusLabel(getStatus(selectedOrder))}
+                </span>
+              </div>
+
+              <strong>
+                {money(getPartnerAmount(selectedOrder, partner?.id))}
+              </strong>
             </div>
 
+            <div className="partner-order-status-editor">
+              <div className="partner-order-status-editor-heading">
+                <div>
+                  <strong>Update Order Status</strong>
+                  <span>
+                    Keep the customer informed about the order progress.
+                  </span>
+                </div>
+              </div>
+
+              <div className="partner-order-status-editor-controls">
+
+                <select
+                  value={selectedStatus}
+                  onChange={(event) => {
+                    setSelectedStatus(event.target.value);
+                    setStatusUpdateError("");
+                  }}
+                  disabled={statusUpdating}
+                >
+                  <option value="PLACED">
+                    Placed
+                  </option>
+
+                  <option value="CONFIRMED">
+                    Confirmed
+                  </option>
+
+                  <option value="SHIPPED">
+                    Shipped
+                  </option>
+
+                  <option value="DELIVERED">
+                    Delivered
+                  </option>
+
+                  <option value="CANCELLED">
+                    Cancelled
+                  </option>
+
+                  <option value="RETURNED">
+                    Returned
+                  </option>
+                </select>
+
+                <button
+                  type="button"
+                  className="partner-order-status-update-btn"
+                  onClick={handleStatusUpdate}
+                  disabled={
+                    statusUpdating ||
+                    !selectedStatus ||
+                    selectedStatus === getStatus(selectedOrder)
+                  }
+                >
+                  {statusUpdating
+                    ? "Updating..."
+                    : "Update Status"}
+                </button>
+
+              </div>
+
+              {statusUpdateError && (
+                <div className="partner-order-status-update-error">
+                  {statusUpdateError}
+                </div>
+              )}
+
+            </div>
+
+            
             <div className="partner-order-modal-grid">
               <section className="partner-order-detail-section">
                 <div className="partner-order-detail-heading">

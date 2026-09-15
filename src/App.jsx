@@ -1,7 +1,14 @@
-import React from "react";
-import { Routes, Route, Navigate, Outlet } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
+
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import ProductDetails from "./pages/ProductDetails";
@@ -17,6 +24,9 @@ import VillagePartnerRegister from "./pages/VillagePartnerRegister";
 import VillagePartnerDashboard from "./pages/VillagePartnerDashboard";
 import ManageWomen from "./pages/ManageWomen";
 import PartnerProducts from "./pages/PartnerProducts";
+import PartnerOrders from "./pages/PartnerOrders";
+import PartnerEarnings from "./pages/PartnerEarnings";
+
 import AdminLogin from "./admin/AdminLogin";
 import AdminLayout from "./admin/AdminLayout";
 import AdminDashboard from "./admin/AdminDashboard";
@@ -26,27 +36,49 @@ import AdminProducts from "./admin/AdminProducts";
 import AdminOrders from "./admin/AdminOrders";
 import AdminCustomers from "./admin/AdminCustomers";
 import AdminCategories from "./admin/AdminCategories";
+
 import Checkout from "./pages/Checkout";
 import OrderConfirmation from "./pages/OrderConfirmation";
-import PartnerOrders from "./pages/PartnerOrders";
-import PartnerEarnings from "./pages/PartnerEarnings";
+
+const API_URL = "https://heriva-backend.onrender.com/api";
+
+
+/* =========================================================
+   GET LOGIN TOKEN
+========================================================= */
+
+function getToken() {
+  return (
+    localStorage.getItem("token") ||
+    sessionStorage.getItem("token")
+  );
+}
+
+
+/* =========================================================
+   GET USER ROLE
+========================================================= */
+
+function getUserRole() {
+  return (
+    localStorage.getItem("userRole") ||
+    sessionStorage.getItem("userRole") ||
+    ""
+  );
+}
+
+
+/* =========================================================
+   ADMIN PROTECTED ROUTE
+========================================================= */
 
 function AdminProtectedRoute() {
-  const token =
-    localStorage.getItem("token") ||
-    sessionStorage.getItem("token");
-
-  const userRole =
-    localStorage.getItem("userRole") ||
-    sessionStorage.getItem("userRole");
+  const token = getToken();
+  const userRole = getUserRole();
 
   const isAdmin =
     !!token &&
     String(userRole).toUpperCase() === "ADMIN";
-
-  console.log("AdminProtectedRoute: token =", token);
-  console.log("AdminProtectedRoute: userRole =", userRole);
-  console.log("AdminProtectedRoute: isAdmin =", isAdmin);
 
   if (!isAdmin) {
     return <Navigate to="/" replace />;
@@ -55,69 +87,299 @@ function AdminProtectedRoute() {
   return <Outlet />;
 }
 
-function VillagePartnerProtectedRoute() {
-  const token =
-    localStorage.getItem("token") ||
-    sessionStorage.getItem("token");
 
-  const userRole =
-    localStorage.getItem("userRole") ||
-    sessionStorage.getItem("userRole");
+/* =========================================================
+   PENDING / APPROVED PARTNER DASHBOARD ROUTE
 
-  const isVillagePartner =
-    !!token &&
-    String(userRole).toUpperCase() === "VILLAGE_PARTNER";
+   Rules:
 
-  console.log(
-    "VillagePartnerProtectedRoute: token =",
-    token
-  );
+   CUSTOMER + PENDING     -> dashboard allowed
+   VILLAGE_PARTNER        -> dashboard allowed
+   CUSTOMER + no request  -> blocked
+   CUSTOMER + rejected    -> blocked
+   ADMIN                   -> blocked
+========================================================= */
 
-  console.log(
-    "VillagePartnerProtectedRoute: userRole =",
-    userRole
-  );
+function PartnerDashboardProtectedRoute() {
+  const token = getToken();
+  const userRole = getUserRole();
 
-  console.log(
-    "VillagePartnerProtectedRoute: isVillagePartner =",
-    isVillagePartner
-  );
+  const [status, setStatus] = useState("loading");
 
-  if (!isVillagePartner) {
+  useEffect(() => {
+    let mounted = true;
+
+    const checkPartnerStatus = async () => {
+      if (!token) {
+        if (mounted) {
+          setStatus("unauthorized");
+        }
+        return;
+      }
+
+      /*
+       * Already approved partner
+       */
+      if (
+        String(userRole).toUpperCase() ===
+        "VILLAGE_PARTNER"
+      ) {
+        if (mounted) {
+          setStatus("approved");
+        }
+        return;
+      }
+
+      /*
+       * Normal customer.
+       * Check whether they have submitted a
+       * Village Partner application.
+       */
+      try {
+        const response = await fetch(
+          `${API_URL}/partner/me`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          if (mounted) {
+            setStatus("unauthorized");
+          }
+          return;
+        }
+
+        const partner = await response.json();
+
+        const partnerStatus = String(
+          partner?.status ||
+          partner?.partnerStatus ||
+          partner?.approvalStatus ||
+          ""
+        ).toUpperCase();
+
+        /*
+         * Pending application
+         */
+        if (
+          partnerStatus === "PENDING" ||
+          partnerStatus === "PENDING_APPROVAL" ||
+          partnerStatus === "PENDING_APPROVALS"
+        ) {
+          if (mounted) {
+            setStatus("pending");
+          }
+          return;
+        }
+
+        /*
+         * Approved application
+         */
+        if (
+          partnerStatus === "APPROVED" ||
+          partnerStatus === "ACTIVE"
+        ) {
+          if (mounted) {
+            setStatus("approved");
+          }
+          return;
+        }
+
+        /*
+         * Rejected / no application
+         */
+        if (mounted) {
+          setStatus("unauthorized");
+        }
+      } catch (error) {
+        console.error(
+          "Unable to check partner status:",
+          error
+        );
+
+        if (mounted) {
+          setStatus("unauthorized");
+        }
+      }
+    };
+
+    checkPartnerStatus();
+
+    return () => {
+      mounted = false;
+    };
+  }, [token, userRole]);
+
+  /*
+   * Prevent redirect before API check completes.
+   */
+  if (status === "loading") {
+    return (
+      <div
+        style={{
+          minHeight: "60vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: "14px",
+          color: "#6f665f",
+        }}
+      >
+        Checking your partner application...
+      </div>
+    );
+  }
+
+  if (
+    status !== "pending" &&
+    status !== "approved"
+  ) {
     return <Navigate to="/" replace />;
   }
 
   return <Outlet />;
 }
 
+
+/* =========================================================
+   APPROVED PARTNER ONLY
+
+   Rules:
+
+   VILLAGE_PARTNER -> allowed
+   PENDING CUSTOMER -> blocked
+   NORMAL CUSTOMER -> blocked
+========================================================= */
+
+function ApprovedPartnerProtectedRoute() {
+  const token = getToken();
+  const userRole = getUserRole();
+
+  const isApprovedPartner =
+    !!token &&
+    String(userRole).toUpperCase() ===
+      "VILLAGE_PARTNER";
+
+  if (!isApprovedPartner) {
+    return <Navigate to="/partner/dashboard" replace />;
+  }
+
+  return <Outlet />;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
 export default function App() {
   return (
     <div className="app">
       <Header />
+
       <main>
         <Routes>
+
+          {/* =================================================
+              PUBLIC ROUTES
+          ================================================= */}
+
           <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/product/:id" element={<ProductDetails />} />
-          <Route path="/our-women" element={<OurWomen />} />
-          <Route path="/our-story" element={<OurStory />} />
-          <Route path="/village-partners" element={<VillagePartners />} />
-          <Route path="/impact" element={<Impact />} />
-          <Route path="/cart" element={<CartCheckout />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/orders" element={<Account />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/village-partner/register" element={<VillagePartnerRegister />}/>
-          <Route path="/admin/login" element={<AdminLogin />}/>
-          <Route path="/checkout" element={<Checkout />}/>
-          <Route path="/orders/:id" element={<OrderConfirmation />}/>
-          <Route path="/partner" element={<VillagePartnerProtectedRoute />}>
-          
-            {/* /partner */}
+
+          <Route
+            path="/shop"
+            element={<Shop />}
+          />
+
+          <Route
+            path="/product/:id"
+            element={<ProductDetails />}
+          />
+
+          <Route
+            path="/our-women"
+            element={<OurWomen />}
+          />
+
+          <Route
+            path="/our-story"
+            element={<OurStory />}
+          />
+
+          <Route
+            path="/village-partners"
+            element={<VillagePartners />}
+          />
+
+          <Route
+            path="/impact"
+            element={<Impact />}
+          />
+
+          <Route
+            path="/cart"
+            element={<CartCheckout />}
+          />
+
+          <Route
+            path="/account"
+            element={<Account />}
+          />
+
+          <Route
+            path="/orders"
+            element={<Account />}
+          />
+
+          <Route
+            path="/login"
+            element={<Login />}
+          />
+
+          <Route
+            path="/signup"
+            element={<Signup />}
+          />
+
+          <Route
+            path="/village-partner/register"
+            element={<VillagePartnerRegister />}
+          />
+
+          <Route
+            path="/admin/login"
+            element={<AdminLogin />}
+          />
+
+          <Route
+            path="/checkout"
+            element={<Checkout />}
+          />
+
+          <Route
+            path="/orders/:id"
+            element={<OrderConfirmation />}
+          />
+
+
+          {/* =================================================
+              PARTNER DASHBOARD
+
+              Pending user can enter ONLY dashboard.
+          ================================================= */}
+
+          <Route
+            element={
+              <PartnerDashboardProtectedRoute />
+            }
+          >
             <Route
-              index
+              path="/partner"
               element={
                 <Navigate
                   to="/partner/dashboard"
@@ -126,68 +388,60 @@ export default function App() {
               }
             />
 
-            {/* /partner/dashboard */}
             <Route
-              path="dashboard"
-              element={<VillagePartnerDashboard />}
+              path="/partner/dashboard"
+              element={
+                <VillagePartnerDashboard />
+              }
             />
+          </Route>
 
-            {/* /partner/women */}
+
+          {/* =================================================
+              APPROVED PARTNER ONLY
+
+              Pending users cannot access these.
+          ================================================= */}
+
+          <Route
+            element={
+              <ApprovedPartnerProtectedRoute />
+            }
+          >
+
             <Route
-              path="women"
+              path="/partner/women"
               element={<ManageWomen />}
             />
 
-            {/* Future pages */}
             <Route
-              path="products"
+              path="/partner/products"
               element={<PartnerProducts />}
             />
 
             <Route
-              path="orders"
+              path="/partner/orders"
               element={<PartnerOrders />}
             />
 
             <Route
-              path="earnings"
+              path="/partner/earnings"
               element={<PartnerEarnings />}
             />
 
-            {/*<Route
-              path="training"
-              element={<PartnerTraining />}
-            />
-
-            <Route
-              path="community"
-              element={<PartnerCommunity />}
-            />
-
-            <Route
-              path="messages"
-              element={<PartnerMessages />}
-            />
-
-            <Route
-              path="reports"
-              element={<PartnerReports />}
-            />
-
-            <Route
-              path="profile"
-              element={<PartnerProfile />}
-            />
-
-            <Route
-              path="settings"
-              element={<PartnerSettings />}
-            />*/}
-
-
           </Route>
+
+
+          {/* =================================================
+              ADMIN ROUTES
+          ================================================= */}
+
           <Route element={<AdminProtectedRoute />}>
-            <Route path="/admin" element={<AdminLayout />}>
+            <Route
+              path="/admin"
+              element={<AdminLayout />}
+            >
+
               <Route
                 index
                 element={
@@ -233,29 +487,22 @@ export default function App() {
                 element={<AdminCategories />}
               />
 
-              {/*<Route
-                path="training"
-                element={<AdminTraining />}
-              />
-
-              <Route
-                path="content"
-                element={<AdminContent />}
-              />
-
-              <Route
-                path="reports"
-                element={<AdminReports />}
-              />
-
-              <Route
-                path="settings"
-                element={<AdminSettings />}
-              />*/}
             </Route>
           </Route>
+
+
+          {/* =================================================
+              FALLBACK
+          ================================================= */}
+
+          <Route
+            path="*"
+            element={<Navigate to="/" replace />}
+          />
+
         </Routes>
       </main>
+
       <Footer />
     </div>
   );

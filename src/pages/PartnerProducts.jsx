@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import {
   Bell,
@@ -175,12 +175,17 @@ function getStatusLabel(status) {
    ========================================================= */
 
 export default function PartnerProducts() {
+  const navigate = useNavigate();
+
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [women, setWomen] = useState([]);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [womenLoading, setWomenLoading] = useState(true);
+  const [womenLoadError, setWomenLoadError] = useState("");
+  const [showNoWomenPrompt, setShowNoWomenPrompt] = useState(false);
 
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("ALL");
@@ -335,6 +340,9 @@ export default function PartnerProducts() {
      ======================================================= */
 
   async function loadWomen() {
+    setWomenLoading(true);
+    setWomenLoadError("");
+
     try {
       const response = await fetch(
         `${API_BASE}/partner/women`,
@@ -345,19 +353,30 @@ export default function PartnerProducts() {
         }
       );
 
+      const data = await response.json().catch(() => ({}));
+
       if (!response.ok) {
-        return;
+        throw new Error(
+          data?.message ||
+            data?.error ||
+            `Unable to load women. Server returned ${response.status}`
+        );
       }
 
-      const data = await response.json();
+      const list = Array.isArray(data)
+        ? data
+        : data.content || [];
 
-      setWomen(
-        Array.isArray(data)
-          ? data
-          : data.content || []
-      );
+      setWomen(list);
     } catch (err) {
       console.error("Women loading error:", err);
+      setWomen([]);
+      setWomenLoadError(
+        err.message ||
+          "Women could not be loaded from the backend."
+      );
+    } finally {
+      setWomenLoading(false);
     }
   }
 
@@ -592,6 +611,23 @@ export default function PartnerProducts() {
      ======================================================= */
 
   function openCreateModal() {
+    // A product must always belong to a woman artisan.
+    // Do not allow creation until this partner has at least one woman.
+    if (womenLoading) {
+      setSaveError("Please wait while the women list is loading.");
+      return;
+    }
+
+    if (womenLoadError) {
+      setSaveError("Women could not be loaded. Please refresh and try again.");
+      return;
+    }
+
+    if (women.length === 0) {
+      setShowNoWomenPrompt(true);
+      return;
+    }
+
     setEditingProduct(null);
 
     setForm({
@@ -899,6 +935,16 @@ export default function PartnerProducts() {
 
 
   /* =======================================================
+     WOMEN CHECK
+     ======================================================= */
+
+  const hasNoWomen =
+    !womenLoading &&
+    !womenLoadError &&
+    women.length === 0;
+
+
+  /* =======================================================
      RENDER
      ======================================================= */
 
@@ -1177,6 +1223,42 @@ export default function PartnerProducts() {
 
         <main className="dashboard-main manage-women-main">
 
+          {hasNoWomen ? (
+            <section className="products-no-women-page">
+              <div className="products-no-women-card">
+                <div className="products-no-women-icon">
+                  <UsersRound size={34} />
+                </div>
+
+                <span className="products-no-women-kicker">
+                  ONE MORE STEP
+                </span>
+
+                <h1>Add a woman artisan first</h1>
+
+                <p>
+                  You need to add at least one woman to your partner profile
+                  before you can create or manage products. Each product must
+                  be linked to a woman artisan.
+                </p>
+
+                <button
+                  type="button"
+                  className="products-go-women-btn"
+                  onClick={() => navigate("/partner/women")}
+                >
+                  <UsersRound size={17} />
+                  Go to Manage Women
+                  <span>→</span>
+                </button>
+
+                <small>
+                  Add a woman, then return here to add her handmade products.
+                </small>
+              </div>
+            </section>
+          ) : (
+            <>
 
           {/* =================================================
               HERO
@@ -1710,6 +1792,9 @@ export default function PartnerProducts() {
 
           </section>
 
+            </>
+          )}
+
         </main>
 
       </div>
@@ -1750,6 +1835,71 @@ export default function PartnerProducts() {
         </div>
 
       </footer>
+
+
+      {/* =======================================================
+          NO WOMEN PROMPT
+          ======================================================= */}
+
+      {showNoWomenPrompt && (
+        <div
+          className="product-no-women-overlay"
+          onMouseDown={() => setShowNoWomenPrompt(false)}
+        >
+          <div
+            className="product-no-women-modal"
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="product-no-women-close"
+              onClick={() => setShowNoWomenPrompt(false)}
+              aria-label="Close"
+            >
+              <X size={18} />
+            </button>
+
+            <div className="product-no-women-modal-icon">
+              <UsersRound size={28} />
+            </div>
+
+            <span className="product-no-women-modal-kicker">
+              ADD A WOMAN FIRST
+            </span>
+
+            <h2>
+              You need a woman artisan before adding a product
+            </h2>
+
+            <p>
+              Every product must be connected to one of the women you manage.
+              Add at least one woman first, then come back here to create her products.
+            </p>
+
+            <div className="product-no-women-modal-actions">
+              <button
+                type="button"
+                className="product-no-women-secondary"
+                onClick={() => setShowNoWomenPrompt(false)}
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                className="product-no-women-primary"
+                onClick={() => {
+                  setShowNoWomenPrompt(false);
+                  navigate("/partner/women");
+                }}
+              >
+                <UsersRound size={16} />
+                Manage Women
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
 
       {/* =======================================================

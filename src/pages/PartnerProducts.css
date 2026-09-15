@@ -2947,3 +2947,313 @@ input {
     width: 100%;
   }
 }
+
+
+/* =========================================================
+   NO WOMEN / ADD WOMAN FIRST BLOCK
+   Prevent product creation until this partner has at least
+   one woman artisan assigned to them.
+   ========================================================= */
+
+.partner-products-page .products-no-women-page {
+  min-height: calc(100vh - 130px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 35px 20px 45px;
+  box-sizing: border-box;
+}
+
+.partner-products-page .products-no-women-card {
+  position: relative;
+  width: min(560px, 100%);
+  padding: 42px 42px 38px;
+  box-sizing: border-box;
+  text-align: center;
+  background: #fffefa;
+  border: 1px solid #e5ddd3;
+  border-radius: 14px;
+  box-shadow: 0 14px 40px rgba(61, 45, 35, 0.075);
+}
+
+.partner-products-page .products-no-women-card::before {
+  content: "";
+  position: absolute;
+  width: 145px;
+  height: 145px;
+  top: -72px;
+  right: -55px;
+  border-radius: 50%;
+  border: 1px solid rgba(169, 75, 57, 0.08);
+  pointer-events: none;
+}
+
+.partner-products-page .products-no-women-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #f4e5db;
+  color: #a94b39;
+}
+
+.partner-products-page .products-no-women-kicker {
+  display: block;
+  margin-bottom: 10px;
+  color: #7b7068;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.partner-products-page .products-no-women-card h1 {
+  margin: 0 0 11px;
+  color: #28352d;
+  font: 600 30px / 1.15 "Playfair Display", serif;
+}
+
+.partner-products-page .products-no-women-card p {
+  max-width: 455px;
+  margin: 0 auto;
+  color: #686d68;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.partner-products-page .products-go-women-btn {
+  min-height: 42px;
+  margin-top: 23px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 7px;
+  background: #a94b39;
+  color: #fff;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 7px 18px rgba(169, 75, 57, 0.18);
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.partner-products-page .products-go-women-btn:hover {
+  background: #913d2e;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(169, 75, 57, 0.22);
+}
+
+.partner-products-page .products-go-women-btn span {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.partner-products-page .products-no-women-card small {
+  display: block;
+  margin-top: 15px;
+  color: #92908b;
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   NO WOMEN PROMPT MODAL
+   ========================================================= */
+
+.partner-products-page .product-no-women-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1400;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background: rgba(34, 27, 22, 0.52);
+  backdrop-filter: blur(2px);
+}
+
+.partner-products-page .product-no-women-modal {
+  position: relative;
+  width: min(470px, 100%);
+  padding: 34px 34px 28px;
+  box-sizing: border-box;
+  text-align: center;
+  background: #fffefa;
+  border: 1px solid #e4ddd5;
+  border-radius: 13px;
+  box-shadow: 0 24px 70px rgba(25, 20, 16, 0.2);
+}
+
+.partner-products-page .product-no-women-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #f5eee8;
+  color: #766d66;
+  cursor: pointer;
+}
+
+.partner-products-page .product-no-women-close:hover {
+  background: #eee0d7;
+  color: #a94b39;
+}
+
+.partner-products-page .product-no-women-modal-icon {
+  width: 62px;
+  height: 62px;
+  margin: 0 auto 16px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #f4e5db;
+  color: #a94b39;
+}
+
+.partner-products-page .product-no-women-modal-kicker {
+  display: block;
+  margin-bottom: 9px;
+  color: #8a7a70;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+}
+
+.partner-products-page .product-no-women-modal h2 {
+  margin: 0 auto 10px;
+  max-width: 380px;
+  color: #2b3730;
+  font: 600 23px / 1.2 "Playfair Display", serif;
+}
+
+.partner-products-page .product-no-women-modal p {
+  max-width: 385px;
+  margin: 0 auto;
+  color: #73766f;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.partner-products-page .product-no-women-modal-actions {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.partner-products-page .product-no-women-secondary,
+.partner-products-page .product-no-women-primary {
+  min-height: 38px;
+  padding: 0 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: 6px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.partner-products-page .product-no-women-secondary {
+  border: 1px solid #ded8d1;
+  background: #fff;
+  color: #656b65;
+}
+
+.partner-products-page .product-no-women-secondary:hover {
+  background: #f7f1eb;
+  border-color: #cfc4b9;
+}
+
+.partner-products-page .product-no-women-primary {
+  border: 1px solid #a94b39;
+  background: #a94b39;
+  color: #fff;
+  box-shadow: 0 5px 14px rgba(169, 75, 57, 0.15);
+}
+
+.partner-products-page .product-no-women-primary:hover {
+  background: #913d2e;
+  border-color: #913d2e;
+}
+
+/* Never allow the add-product hero button to appear misleading while
+   the women relationship is unavailable. */
+.partner-products-page .products-add-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+@media (max-width: 900px) {
+  .partner-products-page .products-no-women-page {
+    min-height: calc(100vh - 95px);
+    padding: 25px 14px 35px;
+  }
+
+  .partner-products-page .products-no-women-card {
+    padding: 34px 24px 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .partner-products-page .products-no-women-card {
+    padding: 30px 19px 27px;
+    border-radius: 12px;
+  }
+
+  .partner-products-page .products-no-women-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 15px;
+  }
+
+  .partner-products-page .products-no-women-card h1 {
+    font-size: 25px;
+  }
+
+  .partner-products-page .products-no-women-card p {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  .partner-products-page .products-go-women-btn {
+    width: 100%;
+  }
+
+  .partner-products-page .product-no-women-overlay {
+    padding: 14px;
+  }
+
+  .partner-products-page .product-no-women-modal {
+    padding: 30px 20px 22px;
+  }
+
+  .partner-products-page .product-no-women-modal h2 {
+    font-size: 21px;
+  }
+
+  .partner-products-page .product-no-women-modal-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .partner-products-page .product-no-women-secondary,
+  .partner-products-page .product-no-women-primary {
+    width: 100%;
+  }
+}

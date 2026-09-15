@@ -932,12 +932,14 @@ body {
 .woman-card {
   cursor: pointer;
   position: relative;
+  padding: 5px;
 }
 
 .woman-story-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  margin-left: 5px;
   gap: 7px;
 
   margin-top: 12px;
@@ -3424,5 +3426,177 @@ body {
 
   .home .impact-stats span {
     font-size: 6.5px;
+  }
+}
+
+
+/* =========================================================
+   WOMEN POPUP — PC MATCHES MOBILE POPUP
+   Skills + products are always visible on desktop too.
+   ========================================================= */
+
+@media (min-width: 761px) {
+
+  .woman-modal-overlay {
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 24px !important;
+  }
+
+  .woman-modal-overlay > .woman-modal {
+    width: min(760px, calc(100vw - 48px)) !important;
+    max-width: 760px !important;
+    max-height: min(88vh, 760px) !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    overflow: hidden !important;
+    border-radius: 16px !important;
+  }
+
+  /* Image on top, exactly like the mobile popup */
+  .woman-modal-overlay > .woman-modal > .woman-modal-image {
+    width: 100% !important;
+    height: 300px !important;
+    min-height: 300px !important;
+    flex: 0 0 300px !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > .woman-modal-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+
+  /* Content sits directly below the image */
+  .woman-modal-overlay > .woman-modal > .woman-modal-content {
+    width: 100% !important;
+    min-width: 0 !important;
+
+    box-sizing: border-box !important;
+    padding: 28px 32px 30px !important;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    flex: 1 1 auto !important;
+
+    scrollbar-width: thin;
+    scrollbar-color: #cbb8aa transparent;
+  }
+
+  .woman-modal-overlay > .woman-modal > .woman-modal-content::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  .woman-modal-overlay > .woman-modal > .woman-modal-content::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .woman-modal-overlay > .woman-modal > .woman-modal-content::-webkit-scrollbar-thumb {
+    background: #d2c1b4;
+    border-radius: 20px;
+  }
+
+  .woman-modal-overlay > .woman-modal > .woman-modal-content::-webkit-scrollbar-thumb:hover {
+    background: #a94b39;
+  }
+
+  .woman-modal-overlay > .woman-modal .woman-modal-content h2 {
+    font-size: 30px !important;
+    margin: 7px 0 12px !important;
+  }
+
+  /* Location */
+  .woman-modal-overlay > .woman-modal .woman-modal-location {
+    margin-bottom: 16px !important;
+    font-size: 12px !important;
+  }
+
+  /* Skills */
+  .woman-modal-overlay > .woman-modal .woman-detail-block {
+    padding: 15px 0 !important;
+  }
+
+  .woman-modal-overlay > .woman-modal .woman-detail-block h4 {
+    margin-bottom: 7px !important;
+    font-size: 13px !important;
+  }
+
+  .woman-modal-overlay > .woman-modal .woman-detail-block p {
+    font-size: 12px !important;
+    line-height: 1.65 !important;
+  }
+
+  /* Products + handmade information */
+  .woman-modal-overlay > .woman-modal .woman-modal-meta {
+    width: 100% !important;
+
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+
+    margin-top: 7px !important;
+  }
+
+  .woman-modal-overlay > .woman-modal .woman-modal-meta > div {
+    min-width: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+
+    padding: 12px 13px !important;
+    border-radius: 9px !important;
+
+    background: #f8f3eb !important;
+  }
+
+  .woman-modal-overlay > .woman-modal .woman-modal-meta strong {
+    font-size: 13px !important;
+  }
+
+  .woman-modal-overlay > .woman-modal .woman-modal-meta small {
+    font-size: 10px !important;
+  }
+
+  .woman-modal-overlay > .woman-modal .woman-modal-meta svg {
+    width: 19px !important;
+    height: 19px !important;
+    flex: 0 0 auto !important;
+  }
+
+  /* Make the close button clearly visible over the image */
+  .woman-modal-overlay > .woman-modal > .woman-modal-close {
+    top: 14px !important;
+    right: 14px !important;
+    width: 40px !important;
+    height: 40px !important;
+
+    background: rgba(255, 254, 250, 0.95) !important;
+    border: 1px solid rgba(180, 160, 148, 0.55) !important;
+    box-shadow: 0 4px 14px rgba(30, 20, 15, 0.12) !important;
+  }
+}
+
+/* A slightly tighter desktop version for laptop screens */
+@media (min-width: 761px) and (max-height: 800px) {
+
+  .woman-modal-overlay > .woman-modal {
+    max-height: calc(100vh - 30px) !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > .woman-modal-image {
+    height: 245px !important;
+    min-height: 245px !important;
+    flex-basis: 245px !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > .woman-modal-content {
+    padding: 22px 28px 24px !important;
   }
 }

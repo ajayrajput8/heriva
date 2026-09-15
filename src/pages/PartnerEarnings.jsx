@@ -102,18 +102,66 @@ function getItemSales(item) {
   );
 }
 
-function getOrderSales(order) {
-  return getItems(order).reduce((sum, item) => sum + getItemSales(item), 0);
+function getPartnerIdFromItem(item) {
+  return (
+    item?.woman?.partner?.id ||
+    item?.product?.woman?.partner?.id ||
+    item?.product?.partner?.id ||
+    item?.partner?.id ||
+    null
+  );
 }
 
-function getOrderEarnings(order) {
-  const explicit = getItems(order).reduce(
-    (sum, item) => sum + Number(item?.partnerCommission || 0),
+function getPartnerItems(order, partnerId) {
+  const items = getItems(order);
+
+  if (!partnerId) return items;
+
+  const matched = items.filter((item) => {
+    const itemPartnerId = getPartnerIdFromItem(item);
+    return (
+      itemPartnerId != null &&
+      Number(itemPartnerId) === Number(partnerId)
+    );
+  });
+
+  return matched;
+}
+
+function isCancelledOrReturned(order) {
+  const status = String(order?.status || "").toUpperCase();
+
+  return (
+    status.includes("CANCEL") ||
+    status.includes("RETURN")
+  );
+}
+
+function getPartnerSales(order, partnerId) {
+  if (isCancelledOrReturned(order)) return 0;
+
+  return getPartnerItems(order, partnerId).reduce(
+    (sum, item) => sum + getItemSales(item),
+    0
+  );
+}
+
+function getPartnerEarnings(order, partnerId) {
+  if (isCancelledOrReturned(order)) return 0;
+
+  const partnerItems = getPartnerItems(order, partnerId);
+
+  if (!partnerItems.length) return 0;
+
+  const explicit = partnerItems.reduce(
+    (sum, item) =>
+      sum + Number(item?.partnerCommission || 0),
     0
   );
 
   if (explicit > 0) return explicit;
-  return getOrderSales(order) * PARTNER_SHARE;
+
+  return getPartnerSales(order, partnerId) * PARTNER_SHARE;
 }
 
 function getOrderNumber(order) {
@@ -122,6 +170,7 @@ function getOrderNumber(order) {
 
 export default function PartnerEarnings() {
   const [orders, setOrders] = useState([]);
+  const [partner, setPartner] = useState(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState("");
@@ -137,9 +186,14 @@ export default function PartnerEarnings() {
 
       if (!getToken()) throw new Error("Please log in as a Village Partner.");
 
-      const data = await apiRequest("/orders/partner");
-      console.log("Partner earnings data:", data);
-      setOrders(getOrdersFromResponse(data));
+      const partnerData = await apiRequest("/partner/me");
+      const ordersData = await apiRequest("/orders/partner");
+
+      console.log("Partner earnings partner:", partnerData);
+      console.log("Partner earnings data:", ordersData);
+
+      setPartner(partnerData);
+      setOrders(getOrdersFromResponse(ordersData));
     } catch (err) {
       console.error("Partner earnings error:", err);
       setError(err?.message || "Could not load earnings.");
@@ -153,33 +207,83 @@ export default function PartnerEarnings() {
     loadOrders();
   }, [loadOrders]);
 
+  const partnerId =
+    partner?.id ||
+    partner?.partnerId ||
+    partner?.villagePartner?.id ||
+    null;
+
   const filteredOrders = useMemo(() => {
-    if (range === "ALL") return orders;
+    let list = orders.filter(
+      (order) =>
+        !isCancelledOrReturned(order) &&
+        getPartnerItems(order, partnerId).length > 0
+    );
 
-    const cutoff = new Date();
-    cutoff.setDate(cutoff.getDate() - Number(range));
+    if (range !== "ALL") {
+      const cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - Number(range));
 
-    return orders.filter((order) => {
-      const created = new Date(order?.createdAt || order?.orderDate || "");
-      return !Number.isNaN(created.getTime()) && created >= cutoff;
-    });
-  }, [orders, range]);
+      list = list.filter((order) => {
+        const created = new Date(
+          order?.createdAt ||
+          order?.orderDate ||
+          order?.updatedAt ||
+          ""
+        );
+
+        return (
+          !Number.isNaN(created.getTime()) &&
+          created >= cutoff
+        );
+      });
+    }
+
+    return list.sort(
+      (a, b) =>
+        new Date(
+          b?.createdAt ||
+          b?.orderDate ||
+          b?.updatedAt ||
+          0
+        ) -
+        new Date(
+          a?.createdAt ||
+          a?.orderDate ||
+          a?.updatedAt ||
+          0
+        )
+    );
+  }, [orders, range, partnerId]);
 
   useEffect(() => {
     setPage(1);
   }, [range]);
 
   const metrics = useMemo(() => {
-    const sales = filteredOrders.reduce((sum, order) => sum + getOrderSales(order), 0);
-    const earnings = filteredOrders.reduce((sum, order) => sum + getOrderEarnings(order), 0);
+    const sales = filteredOrders.reduce(
+      (sum, order) =>
+        sum + getPartnerSales(order, partnerId),
+      0
+    );
+
+    const earnings = filteredOrders.reduce(
+      (sum, order) =>
+        sum + getPartnerEarnings(order, partnerId),
+      0
+    );
 
     const delivered = filteredOrders.filter((order) =>
-      String(order?.status || "").toUpperCase().includes("DELIVER")
+      String(order?.status || "")
+        .toUpperCase()
+        .includes("DELIVER")
     ).length;
 
     const pending = filteredOrders.filter((order) => {
-      const status = String(order?.status || "").toUpperCase();
-      return !status.includes("DELIVER") && !status.includes("CANCEL");
+      const status = String(order?.status || "")
+        .toUpperCase();
+
+      return !status.includes("DELIVER");
     }).length;
 
     return {
@@ -189,7 +293,7 @@ export default function PartnerEarnings() {
       pending,
       orders: filteredOrders.length,
     };
-  }, [filteredOrders]);
+  }, [filteredOrders, partnerId]);
 
   const monthly = useMemo(() => {
     const now = new Date();
@@ -205,7 +309,12 @@ export default function PartnerEarnings() {
     }
 
     orders.forEach((order) => {
-      const date = new Date(order?.createdAt || order?.orderDate || "");
+      const date = new Date(
+        order?.createdAt ||
+        order?.orderDate ||
+        order?.updatedAt ||
+        ""
+      );
       if (Number.isNaN(date.getTime())) return;
 
       const target = months.find(
@@ -213,11 +322,13 @@ export default function PartnerEarnings() {
           month.key === `${date.getFullYear()}-${date.getMonth()}`
       );
 
-      if (target) target.amount += getOrderEarnings(order);
+      if (target) {
+        target.amount += getPartnerEarnings(order, partnerId);
+      }
     });
 
     return months;
-  }, [orders]);
+  }, [orders, partnerId]);
 
   const maxMonthly = Math.max(...monthly.map((item) => item.amount), 1);
 
@@ -236,13 +347,23 @@ export default function PartnerEarnings() {
   function downloadCSV() {
     const rows = [
       ["Order", "Date", "Sales", "Partner Earnings", "Status"],
-      ...filteredOrders.map((order) => [
-        getOrderNumber(order),
-        formatDate(order?.createdAt || order?.orderDate),
-        getOrderSales(order).toFixed(2),
-        getOrderEarnings(order).toFixed(2),
-        formatStatus(order?.status),
-      ]),
+      ...filteredOrders
+        .filter(
+          (order) =>
+            !isCancelledOrReturned(order) &&
+            getPartnerItems(order, partnerId).length > 0
+        )
+        .map((order) => [
+          getOrderNumber(order),
+          formatDate(
+            order?.createdAt ||
+            order?.orderDate ||
+            order?.updatedAt
+          ),
+          getPartnerSales(order, partnerId).toFixed(2),
+          getPartnerEarnings(order, partnerId).toFixed(2),
+          formatStatus(order?.status),
+        ]),
     ];
 
     const csv = rows
@@ -516,8 +637,8 @@ export default function PartnerEarnings() {
                           <tr key={order?.id || order?.orderNumber}>
                             <td><b>{getOrderNumber(order)}</b></td>
                             <td>{formatDate(order?.createdAt || order?.orderDate)}</td>
-                            <td>{formatCurrency(getOrderSales(order))}</td>
-                            <td className="earning-value">{formatCurrency(getOrderEarnings(order))}</td>
+                            <td>{formatCurrency(getPartnerSales(order, partnerId))}</td>
+                            <td className="earning-value">{formatCurrency(getPartnerEarnings(order, partnerId))}</td>
                             <td>
                               <span className={`status earning-status ${statusClass(order?.status)}`}>
                                 {formatStatus(order?.status)}

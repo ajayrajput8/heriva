@@ -73,7 +73,7 @@ export default function Signup() {
 
       // Redirect according to role
       if (data.role === "VILLAGE_PARTNER") {
-        navigate("/partner-dashboard");
+        navigate("/partner/dashboard");
       } else {
         navigate("/");
       }
