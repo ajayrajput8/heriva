@@ -107,7 +107,7 @@ export default function Signup() {
             ♧
           </div>
 
-          <h1>Made By Her</h1>
+          <h1>Heriva</h1>
 
           <p>
             Rural Hands. Brighter Tomorrows.
