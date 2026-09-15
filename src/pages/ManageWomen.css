@@ -2423,3 +2423,320 @@ nav a svg {
     padding-bottom: 4px !important;
   }
 }
+
+/* =========================================================
+   FINAL DESKTOP FIX — FORM ITSELF SCROLLS
+   This is the reliable layout for Add Woman / Edit Woman.
+   Header stays at top, form becomes the scroll area, and
+   Cancel / Add Woman (or Save Changes) are always reachable.
+   ========================================================= */
+
+@media (min-width: 901px) {
+
+  /* Full-screen backdrop. It must NOT be the scroll container. */
+  .woman-modal-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 99999 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+
+    padding: 20px !important;
+    box-sizing: border-box !important;
+
+    overflow: hidden !important;
+    overscroll-behavior: none !important;
+  }
+
+  /* The modal is a fixed viewport-sized shell. */
+  .woman-modal-overlay > .woman-modal {
+    position: relative !important;
+
+    width: min(650px, calc(100vw - 40px)) !important;
+    max-width: 650px !important;
+
+    height: min(90vh, 760px) !important;
+    max-height: calc(100dvh - 40px) !important;
+    min-height: 0 !important;
+
+    margin: 0 !important;
+    padding: 25px !important;
+    box-sizing: border-box !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+
+    overflow: hidden !important;
+
+    border: 1px solid #e7e0d6 !important;
+    border-radius: 12px !important;
+    background: #fffefa !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .20) !important;
+  }
+
+  /* Header does not scroll. */
+  .woman-modal-overlay > .woman-modal > .modal-header {
+    position: relative !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 0 16px !important;
+    padding: 0 48px 16px 0 !important;
+    box-sizing: border-box !important;
+    border-bottom: 1px solid #ece7df !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > .modal-header > div {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > .modal-header > button {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: 34px !important;
+    height: 34px !important;
+    display: grid !important;
+    place-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid #ddd4cb !important;
+    border-radius: 50% !important;
+    background: #fffefa !important;
+    color: #655d57 !important;
+    cursor: pointer !important;
+    z-index: 5 !important;
+  }
+
+  /* =======================================================
+     THE IMPORTANT PART:
+     THE FORM BECOMES THE SCROLL AREA.
+     ======================================================= */
+
+  .woman-modal-overlay > .woman-modal > form {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: 0 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 7px 0 0 !important;
+    box-sizing: border-box !important;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+
+    scrollbar-width: thin !important;
+    scrollbar-color: #c7b5a7 transparent !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > form::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .woman-modal-overlay > .woman-modal > form::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 20px;
+  }
+
+  .woman-modal-overlay > .woman-modal > form::-webkit-scrollbar-thumb {
+    background: #c7b5a7;
+    border-radius: 20px;
+    border: 2px solid #fffefa;
+  }
+
+  .woman-modal-overlay > .woman-modal > form::-webkit-scrollbar-thumb:hover {
+    background: #a94b39;
+  }
+
+  /* Desktop stays two columns. */
+  .woman-modal-overlay > .woman-modal > form > .modal-form-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    gap: 15px 16px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: max-content !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > form > .modal-form-grid > .modal-field {
+    min-width: 0 !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > form > .modal-form-grid > .modal-field.full,
+  .woman-modal-overlay > .woman-modal > form > .modal-form-grid > .active-checkbox {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* Make the photo area fit naturally and allow preview to increase form height. */
+  .woman-modal .image-upload-box {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .woman-modal .image-preview {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+  }
+
+  /* Action buttons are part of the scrolling form content. */
+  .woman-modal-overlay > .woman-modal > form > .modal-actions {
+    position: static !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    min-height: 56px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+
+    margin-top: 20px !important;
+    padding: 16px 0 8px !important;
+
+    border-top: 1px solid #ece7df !important;
+    box-sizing: border-box !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > form > .modal-actions .modal-cancel,
+  .woman-modal-overlay > .woman-modal > form > .modal-actions .modal-save {
+    position: static !important;
+    flex: 0 0 auto !important;
+    min-width: 105px !important;
+    height: 39px !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* =========================================================
+   MOBILE — KEEP THE WORKING MOBILE BEHAVIOUR
+   The desktop-only fix above must not affect mobile.
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .woman-modal-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    min-height: 100vh !important;
+
+    display: block !important;
+    padding: 12px !important;
+    box-sizing: border-box !important;
+
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior-y: contain !important;
+    touch-action: pan-y !important;
+  }
+
+  .woman-modal-overlay > .woman-modal {
+    position: relative !important;
+
+    width: min(650px, 100%) !important;
+    max-width: 650px !important;
+
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+
+    margin: 0 auto 20px !important;
+
+    overflow: visible !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+
+    box-sizing: border-box !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > .modal-header,
+  .woman-modal-overlay > .woman-modal > form {
+    flex: none !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > form {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > form > .modal-form-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    gap: 14px !important;
+  }
+
+  .woman-modal-overlay > .woman-modal .modal-field,
+  .woman-modal-overlay > .woman-modal .modal-field.full,
+  .woman-modal-overlay > .woman-modal .active-checkbox {
+    grid-column: 1 !important;
+    min-width: 0 !important;
+  }
+
+  .woman-modal .modal-field input,
+  .woman-modal .modal-field textarea,
+  .woman-modal .image-upload-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .woman-modal-overlay > .woman-modal > form > .modal-actions {
+    position: static !important;
+    width: 100% !important;
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+    gap: 8px !important;
+    margin-top: 20px !important;
+    padding-top: 16px !important;
+    padding-bottom: 4px !important;
+    box-sizing: border-box !important;
+  }
+
+  .woman-modal .modal-cancel,
+  .woman-modal .modal-save {
+    position: static !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+  }
+}
+
+@media (max-width: 550px) {
+  .woman-modal-overlay {
+    padding: 8px !important;
+  }
+
+  .woman-modal-overlay > .woman-modal {
+    width: 100% !important;
+    margin-bottom: 16px !important;
+    padding: 17px !important;
+  }
+}
