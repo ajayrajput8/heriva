@@ -2169,7 +2169,7 @@ export default function VillagePartnerDashboard() {
       <footer className="dashboard-footer">
 
         <span>
-          © {new Date().getFullYear()} Made By Her.
+          © {new Date().getFullYear()} Heriva.
           All rights reserved.
         </span>
 

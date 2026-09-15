@@ -218,7 +218,7 @@ export default function VillagePartnerRegister() {
           </h1>
 
           <p>
-            Join Made By Her as a Village Partner and help
+            Join Heriva as a Village Partner and help
             rural women showcase their talent to the world.
             Together, we can create real opportunities.
           </p>

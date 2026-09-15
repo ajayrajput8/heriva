@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="footer-brand">
           <Link to="/" className="brand footer-brand-link">
             <span className="brand-mark">♧</span>
-            <span><strong>Made By Her</strong><small>Rural Hands. Brighter Tomorrows.</small></span>
+            <span><strong>Heriva</strong><small>Rural Hands. Brighter Tomorrows.</small></span>
           </Link>
           <p>Handmade • Rural • Real Change</p>
         </div>
@@ -32,7 +32,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© 2024 Made By Her. All rights reserved.</span>
+        <span>© 2026 Heriva. All rights reserved.</span>
         <span>Handmade &nbsp; • &nbsp; Rural &nbsp; • &nbsp; Real Change</span>
       </div>
     </footer>

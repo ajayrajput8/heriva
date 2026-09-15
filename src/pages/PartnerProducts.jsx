@@ -1807,7 +1807,7 @@ export default function PartnerProducts() {
       <footer className="products-footer">
 
         <span>
-          © 2024 Made By Her. All rights reserved.
+          © 2026 Heriva. All rights reserved.
         </span>
 
         <div>

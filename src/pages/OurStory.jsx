@@ -28,7 +28,7 @@ export default function OurStory() {
           </h1>
 
           <p>
-            Made By Her is more than a marketplace. It is a
+            Heriva is more than a marketplace. It is a
             movement to create opportunities for rural women,
             preserve India's rich craft heritage, and build a
             more equitable future.

@@ -262,7 +262,7 @@ export default function Header() {
 
           <span>
             <strong>
-              Kaarika
+              HERIVA
             </strong>
 
             <small>

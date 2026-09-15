@@ -873,7 +873,7 @@ export default function PartnerOrders() {
       </div>
 
       <footer className="dashboard-footer">
-        <span>© {new Date().getFullYear()} Made By Her. All rights reserved.</span>
+        <span>© {new Date().getFullYear()} Heriva. All rights reserved.</span>
         <div>
           <span>Handmade</span>
           <i>|</i>
